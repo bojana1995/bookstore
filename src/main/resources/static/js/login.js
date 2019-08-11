@@ -21,7 +21,10 @@ function login(){
 		},
 		success: function(data){
 			if(data){
-				location.href = "/homePage.html"				
+				if(data.userType == "ADMIN")
+					location.href = "/home-page-admin.html"
+				else
+					location.href = "/home-page-visitor.html"	
 			}else{
 				alert("Failed to login.");
 				location.href = "/login.html"
