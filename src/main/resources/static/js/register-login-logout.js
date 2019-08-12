@@ -71,16 +71,13 @@ function register(){
 			},
 			success: function(data){
 				if(data){
-					alert("User is successfully registered.");
 					location.href = "/index.html"				
 				}else{
 					alert("Failed to register user.");
-					location.href = "/register.html"
 				}
 			},
 			error: function(data){
 				alert('ERROR!!!');
-				//location.href = "/register.html"
 			}
 		});
 	}
@@ -117,12 +114,10 @@ function login(){
 					location.href = "/home-page-visitor.html"	
 			}else{
 				alert("Failed to login.");
-				location.href = "/login.html"
 			}
 		},
 		error: function(data){
 			alert('ERROR!!!\n\n1. invalid request or\n2. wrong credentials');
-			location.href = "/login.html"
 		}
 	});
 }
@@ -144,7 +139,7 @@ function logout() {
 			if(data){
 				location.href = "/index.html"				
 			}else{
-				alert("Failed logout");
+				alert("Failed logout.");
 			}
 		},
 		error: function(data){
@@ -152,3 +147,5 @@ function logout() {
 		}
 	});	
 }
+
+

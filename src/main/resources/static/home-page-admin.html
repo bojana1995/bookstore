@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body>
     <header>
         <div class="header-top">
             <div class="container">
@@ -64,22 +63,238 @@
             </div>
         </div>
     </header>
+    
     <div class="breadcrumb">
         <div class="container">
-            <a class="breadcrumb-item" href="index.html">Home</a>
-            <span class="breadcrumb-item active">Home page admin</span>
+            <a class="breadcrumb-item" href="index.html">Home page</a>
+            <span class="breadcrumb-item active">admin</span>
+            <span class="breadcrumb-item active"><label id="currentlyActive"></label></span>
         </div>
     </div>
-    
-    <footer>
+
+	<section class="static about-sec">
+		<div class="container">
+			<div class="col-xs-12">
+				<div class="block accordian article">
+					<div class="panel-wrapper">
+						<div class="panel">
+							<div style="padding-bottom:30px" class="headline-wrapper">
+								<h4 class="title"><a class="panel-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne0" aria-expanded="true"><i>update account</i><i class="icon fa fa-angle-up" aria-hidden="true"></i></a></h4>
+							</div>
+
+							<div id="collapseOne0" class="collapse in" aria-expanded="true" style="">
+								<div class="content">
+									<div class="panel-group" id="citystore-content-0">
+										<div class="panel">
+											<div class="panel-inner">
+												<div style="padding-top:20px" class="container">
+													<p>Please complete the following fields:</p>
+													<div class="form">
+														<form action="javascript:updateAccount()" id="updateAccountForm" method="POST">
+															<div class="row">
+																<div class="col-md-5">
+																	<input type="text" id="nameUpdateAccount" name="nameUpdate" placeholder="name" required autofocus>
+																	<span class="required-star">*</span>
+																</div>
+																
+																<div class="col-md-5">
+																	<input type="text" id="surnameUpdateAccount" name="surnameUpdate" placeholder="surname" required>
+																	<span class="required-star">*</span>
+																</div>
+																
+																<div class="col-md-5">
+																	<input type="text" id="addressUpdateAccount" name="addressUpdate" placeholder="address" required>
+																	<span class="required-star">*</span>
+																</div>
+																
+																<div class="col-md-5">
+																	<input type="number" id="phoneUpdateAccount" name="phoneUpdate" placeholder="phone" required>
+																	<span class="required-star">*</span>
+																</div>
+																
+																<div class="col-md-11" id="divValidationUpdateAccount"></div>
+																
+																<div class="col-lg-8 col-md-12">
+																	<button class="btn black" id="btnUpdate" type="submit">Update</button>
+																</div>
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					
+						<div class="panel">
+							<div style="padding-bottom:15px" class="headline-wrapper">
+								<h4 class="title"><a class="panel-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne1" aria-expanded="true"><i>add book</i><i class="icon fa fa-angle-up" aria-hidden="true"></i></a></h4>
+							</div>
+
+							<div id="collapseOne1" class="collapse" aria-expanded="true" style="">
+								<div class="content">
+									<div class="panel-group" id="citystore-content-0">
+										<div class="panel">
+											<div class="panel-inner">
+												<div style="padding-top:20px" class="container">
+													<p>Please complete the following fields:</p>
+													<div class="form">
+														<form action="javascript:add()" id="addBookForm" method="POST">
+															<div class="row">
+																<div class="col-md-5">
+																	<input type="text" name="title" placeholder="title" required autofocus>
+																	<span class="required-star">*</span>
+																</div>
+																<div class="col-md-5">
+																	<input type="text" name="author" placeholder="author" required>
+																	<span class="required-star">*</span>
+																</div>
+																<div class="col-md-5">
+																	<input type="text" name="description" placeholder="description" required>
+																	<span class="required-star">*</span>
+																</div>
+																<div class="col-md-5">
+																	<input type="number" name="publishingYear" placeholder="publishing year" required>
+																	<span class="required-star">*</span>
+																</div>
+																<div class="col-md-5">
+																	<input type="text" name="publisher" placeholder="publisher" required>
+																	<span class="required-star">*</span>
+																</div>
+																<div class="col-md-5">
+																	<input type="number" name="price" placeholder="price" required>
+																	<span class="required-star">*</span>
+																</div>
+																<div class="col-md-11" id="divValidation"></div>
+																<div class="col-lg-8 col-md-12">
+																	<button class="btn black" id="btnAdd" type="submit">Add</button>
+																</div>
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="panel">
+							<div style="padding-bottom:15px" class="headline-wrapper">
+								<h4 class="title"><a class="panel-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne2" aria-expanded="true"><i>update or delete book</i><i class="icon fa fa-angle-up" aria-hidden="true"></i></a></h4>
+							</div>
+
+							<div id="collapseOne2" class="collapse" aria-expanded="true" style="">
+								<div class="content">
+									<div class="panel-group" id="citystore-content-0">
+										<div class="panel">
+											<div class="panel-inner">
+												<div class="container">
+													<div class="form">
+														<div class="row">
+															<div class="col-md-10">
+																<h5><b><i><span id="noBooksLabel" class="row"></span></i></b></h5>
+																<table id="booksTable" class="table table-hover table-bordered" style="background-color: white"></table>
+															</div>
+														</div>
+													</div>
+													
+													<div class="form" id="divUpdateBookForm"></div>
+
+													<div id="deleteBookModal" class="modal" tabindex="-1" role="dialog">
+														<div class="modal-dialog" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title">Delete book</h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	<p><i>Are you sure you want to delete book?</i></p>
+																</div>
+																<div class="modal-footer">
+																	<button id="btnYes" type="button" class="btn yellow">Yes</button>
+																	<button type="button" class="btn black" data-dismiss="modal">No</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="panel">
+							<div style="padding-top:15px" class="headline-wrapper">
+								<h4 class="title"><a class="panel-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne3" aria-expanded="true"><i>delete visitors</i><i class="icon fa fa-angle-up" aria-hidden="true"></i></a></h4>
+							</div>
+
+							<div id="collapseOne3" class="collapse" aria-expanded="true" style="">
+								<div class="content">
+									<div class="panel-group" id="citystore-content-0">
+										<div class="panel">
+											<div class="panel-inner">
+												<div class="container">
+													<div class="form">
+														<div class="row">
+															<div class="col-md-10">
+																<h5><b><i><span id="noVisitorsLabel" class="row"></span></i></b></h5>
+																<table id="visitorsTable" class="table table-hover table-bordered" style="background-color: white"></table>
+															</div>
+														</div>
+													</div>
+
+													<div id="deleteVisitorModal" class="modal" tabindex="-1" role="dialog">
+														<div class="modal-dialog" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title">Delete visitor</h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	<p><i>Are you sure you want to delete visitor?</i></p>
+																</div>
+																<div class="modal-footer">
+																	<button id="btnYesVisitor" type="button" class="btn yellow">Yes</button>
+																	<button type="button" class="btn black" data-dismiss="modal">No</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="loader-wrapper hidden">
+						<i class="loader-icon"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer>
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
                     <div class="address">
                         <h4>Our Address</h4>
                         <h6>MagicBook, Boulevard of Europe 162, Serbia</h6>
-                        <h6>Call : 0800 553 21 07</h6>
-                        <h6>Email : www.magicBook.com</h6>
+                        <h6>021 / 455 - 888</h6>
+                        <h6>email : www.magicbook.com</h6>
                     </div>
                     <div class="timing">
                         <h4>Timing</h4>
@@ -111,19 +326,19 @@
                     <div class="form">
                         <h3>Quick Contact us</h3>
                         <h6>If you have any comments, compliments, questions, etc, you can contact us via message.</h6>
-                        <form>
+                        <form action="javascript:sendMessage()" id="sendMessageForm" method="POST">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input placeholder="Name" required>
+                                    <input type="text" name="nameAndSurname" placeholder="name and surname" required autofocus>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="email" placeholder="Email" required>
+                                    <input type="email" name="email" placeholder="email" required>
                                 </div>
                                 <div class="col-md-12">
-                                    <textarea placeholder="Message"></textarea>
+                                    <textarea name="message" placeholder="message"></textarea>
                                 </div>
                                 <div class="col-md-12">
-                                    <button class="btn black">Send</button>
+                                    <button class="btn black" id="btnSendMessage" type="submit">Send message</button>
                                 </div>
                             </div>
                         </form>
@@ -155,6 +370,9 @@
     <script type="text/javascript" src="js/owl.carousel.min.js"></script>
     <script src="js/custom.js"></script>
     <script src="js/register-login-logout.js"></script>
+    <script src="js/user.js"></script>
+    <script src="js/sendMessage.js"></script>
+    <script src="js/book.js"></script>
 </body>
 
 </html>

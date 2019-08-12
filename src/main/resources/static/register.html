@@ -74,7 +74,7 @@
                 <form action="javascript:register()"  id="registrationForm" method="POST">
                     <div class="row">
                         <div class="col-md-4">
-                            <input type="text" name="name" placeholder="name" required>
+                            <input type="text" name="name" placeholder="name" required autofocus>
                             <span class="required-star">*</span>
                         </div>
                         <div class="col-md-4">
@@ -101,7 +101,7 @@
                             <input type="password" name="password2" placeholder=" reenter password" required>
                             <span class="required-star">*</span>
                         </div>
-                        <div id="divValidation"></div>  
+                        <div class="col-md-11" id="divValidation"></div>  
                         <div class="col-lg-8 col-md-12">
                             <button class="btn black" id="btnRegister" type="submit">Register</button>
                             <h5>Already registered? <a href="login.html">Login here</a></h5>
@@ -118,8 +118,8 @@
                     <div class="address">
                         <h4>Our Address</h4>
                         <h6>MagicBook, Boulevard of Europe 162, Serbia</h6>
-                        <h6>Call : 0800 553 21 07</h6>
-                        <h6>Email : www.magicBook.com</h6>
+                        <h6>021 / 455 - 888</h6>
+                        <h6>email : www.magicbook.com</h6>
                     </div>
                     <div class="timing">
                         <h4>Timing</h4>
@@ -151,19 +151,19 @@
                     <div class="form">
                         <h3>Quick Contact us</h3>
                         <h6>If you have any comments, compliments, questions, etc, you can contact us via message.</h6>
-                        <form>
+                        <form action="javascript:sendMessage()" id="sendMessageForm" method="POST">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input placeholder="Name" required>
+                                    <input type="text" name="nameAndSurname" placeholder="name and surname" required autofocus>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="email" placeholder="Email" required>
+                                    <input type="email" name="email" placeholder="email" required>
                                 </div>
                                 <div class="col-md-12">
-                                    <textarea placeholder="Message"></textarea>
+                                    <textarea name="message" placeholder="message"></textarea>
                                 </div>
                                 <div class="col-md-12">
-                                    <button class="btn black">Send</button>
+                                    <button class="btn black" id="btnSendMessage" type="submit">Send message</button>
                                 </div>
                             </div>
                         </form>
@@ -195,6 +195,7 @@
     <script type="text/javascript" src="js/owl.carousel.min.js"></script>
     <script src="js/custom.js"></script>
     <script src="js/register-login-logout.js"></script>
+    <script src="js/sendMessage.js"></script>
 </body>
 
 </html>

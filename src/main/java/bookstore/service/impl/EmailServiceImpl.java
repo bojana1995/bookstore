@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import bookstore.Encryptor;
+import bookstore.model.Message;
 import bookstore.model.MyUser;
 import bookstore.service.EmailService;
 
@@ -31,8 +32,8 @@ public class EmailServiceImpl implements EmailService {
 	@Autowired
 	private Environment env;
 	
-	//aktivacija korisnickog naloga
 	@Async
+	@Override
 	public void sendMailToActivateAccount(MyUser user) {		
 		String decryptedString;
 		
@@ -60,5 +61,16 @@ public class EmailServiceImpl implements EmailService {
 			e.printStackTrace();
 		}
     }
+
+	@Async
+	@Override
+	public void sendMessageMail(Message message) {
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo("nijemidosadno@gmail.com");
+		mail.setFrom(env.getProperty("spring.mail.username"));
+		mail.setSubject("[BOOKSTORE] Message");
+		mail.setText(message.getTextMessage());
+		javaMailSender.send(mail);
+	}
 	
 }

@@ -5,6 +5,7 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.crypto.BadPaddingException;
@@ -34,10 +35,10 @@ import bookstore.model.MyUser;
 import bookstore.model.ShoppingCart;
 import bookstore.model.UserType;
 import bookstore.repository.MyUserRepository;
-import bookstore.service.ShoppingCartService;
 import bookstore.service.EmailService;
 import bookstore.service.MyUserService;
 import bookstore.service.RoleService;
+import bookstore.service.ShoppingCartService;
 
 @RestController
 @RequestMapping(value = "/myUser")
@@ -84,6 +85,24 @@ public class MyUserController {
 		
 		return new ResponseEntity<>(myUsers, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value="/getAllVisitors", method = RequestMethod.GET)
+	public ResponseEntity<List<MyUser>> getAllVisitors() {
+		List<MyUser> myUsers = myUserService.findAll();
+		List<MyUser> visitors = new ArrayList<MyUser>();
+		
+		if(myUsers.equals(null)) {
+			return new ResponseEntity<>(myUsers, HttpStatus.NOT_FOUND);
+		}
+		
+		for(MyUser user : myUsers) {
+			if(user.getUserType().equals(UserType.VISITOR)) {
+				visitors.add(user);
+			}
+		}
+		
+		return new ResponseEntity<>(visitors, HttpStatus.OK);
+	}
 		
 	@RequestMapping(value = "/registration", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<MyUser> registration(@RequestBody MyUserDTO request) throws MailException, InterruptedException, MessagingException, InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException, ParseException {		
@@ -105,9 +124,9 @@ public class MyUserController {
 			
 			for(MyUser u : myUserService.findAll()) {
 				if(!u.getEmail().equals(myUser.getEmail())) {
-					emailService.sendMailToActivateAccount(myUser);
 					shoppingCartService.save(shoppingCart);
 					myUserService.save(myUser);
+					emailService.sendMailToActivateAccount(myUser);
 					logger.info("\n\t\tUser " + request.getEmail() + " is successfully registered.\n");
 					return new ResponseEntity<MyUser>(myUser, HttpStatus.OK);
 				}
@@ -183,30 +202,16 @@ public class MyUserController {
 		return new ResponseEntity<MyUser>(myUser, HttpStatus.OK);
 	}
 	
-	@PreAuthorize("isAuthenticated()")
-	@RequestMapping(value = "/encryptEmail", method = RequestMethod.GET)
-	public String encryptEmail() throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException{
-		MyUser myUser = myUserService.getCurrentUser();
-		
-		if(myUser != null) {
-			String encryptedString = Encryptor.encrypt(myUser.getEmail());
-			return encryptedString;
-		}
-		
-		return null;
+	@RequestMapping(value = "/encryptEmail/{email}", method = RequestMethod.GET)
+	public ResponseEntity<String> encryptEmail(@PathVariable String email) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException{
+		String encryptedString = Encryptor.encrypt(email);
+		return new ResponseEntity<String>(encryptedString, HttpStatus.OK);
 	}
 		
-	@PreAuthorize("isAuthenticated()")
-	@RequestMapping(value = "/decryptEmail", method = RequestMethod.GET)
-	public String decryptEmail() throws InvalidKeyException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException, NoSuchPaddingException, NoSuchAlgorithmException{
-		MyUser myUser = myUserService.getCurrentUser();
-		
-		if(myUser != null) {
-			String decryptedString = Encryptor.decrypt(myUser.getEmail());
-			return decryptedString;
-		}
-		
-		return null;
+	@RequestMapping(value = "/decryptEmail/{email}", method = RequestMethod.GET)
+	public ResponseEntity<String> decryptEmail(@PathVariable String email) throws InvalidKeyException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException, NoSuchPaddingException, NoSuchAlgorithmException{
+		String decryptedString = Encryptor.decrypt(email);
+		return new ResponseEntity<String>(decryptedString, HttpStatus.OK);
 	}
 	
 	@PreAuthorize("isAuthenticated()")
@@ -215,15 +220,15 @@ public class MyUserController {
 		MyUser myUser = myUserService.getCurrentUser();
 		
 		if(myUser != null) {
-			String encryptedString = Encryptor.encrypt(request.getEmail());
+			String encryptedString = Encryptor.encrypt(myUser.getEmail());
 			
-			myUser.setEmail(encryptedString);
-			myUser.setPassword(request.getPassword());
-			myUser.setActivatedAccount(true);
-			myUser.setRole(myUser.getRole());
-			
+			myUser.setName(request.getName());
+			myUser.setSurname(request.getSurname());
+			myUser.setAddress(request.getAddress());
+			myUser.setPhone(request.getPhone());
+						
 			myUserService.save(myUser);
-			logger.info("\n\t\tUser " + request.getEmail() + " has updated his account.\n");
+			logger.info("\n\t\tUser " + encryptedString + " has updated his account.\n");
 			return new ResponseEntity<MyUser>(myUser, HttpStatus.OK);
 		}
 		

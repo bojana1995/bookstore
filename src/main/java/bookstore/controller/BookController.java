@@ -83,6 +83,7 @@ public class BookController {
 				
 				bookService.save(book);
 				logger.info("\n\t\tUser " + decryptedString + " added a book " + book.getTitle() + ".\n");
+				return new ResponseEntity<Book>(book, HttpStatus.OK);
 			}
 		}
 			
@@ -119,7 +120,7 @@ public class BookController {
 	@RequestMapping(value="/delete/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Book> delete(@PathVariable Long id) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
 		MyUser myUser = myUserService.getCurrentUser();
-		String encryptedString = Encryptor.encrypt(myUser.getEmail());
+		String encryptedString = Encryptor.decrypt(myUser.getEmail());
 		
 		Book deleteBook = bookService.findOne(id);
 		

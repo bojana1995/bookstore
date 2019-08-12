@@ -72,7 +72,7 @@ public class Encryptor {
     }
     
     /*public static void main(String[] args) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
-		String email = "admin@email.com";	
+		String email = "petarpetrovic@email.com;";	
 		String encryptedString = Encryptor.encrypt(email);
 		System.out.println("[Encryptor]\t" + email + " -> " + encryptedString);
     }*/
