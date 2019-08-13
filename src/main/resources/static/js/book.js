@@ -14,7 +14,7 @@ $(document).ready(function() {
 					red = "Please select the book you want to update:";
 					$("#noBooksLabel").append(red);
 					$("#noBooksLabel").show();
-					$("#booksTable").append("<thead><tr><th scope=\"col\" class=\"text-center\">Title</th><th scope=\"col\" class=\"text-center\">Author</th><th scope=\"col\" class=\"text-center\">Description</th><th scope=\"col\" class=\"text-center\">Publishing year</th><th scope=\"col\" class=\"text-center\">Publisher</th><th scope=\"col\" class=\"text-center\">Price</th><th scope=\"col\" class=\"text-center\"></th><th scope=\"col\" class=\"text-center\"></th></tr></thead><tbody>");
+					$("#booksTable").append("<thead><tr><th scope=\"col\" class=\"text-center\"><i>Title</i></th><th scope=\"col\" class=\"text-center\"><i>Author</i></th><th scope=\"col\" class=\"text-center\"><i>Description</i></th><th scope=\"col\" class=\"text-center\"><i>Publishing year</i></th><th scope=\"col\" class=\"text-center\"><i>Publisher</i></th><th scope=\"col\" class=\"text-center\"><i>Price</i></th><th scope=\"col\" class=\"text-center\"></th><th scope=\"col\" class=\"text-center\"></th></tr></thead><tbody>");
 
 					for (i = 0; i < data.length; i++) {
 						noviRed = "<tr><td>" + data[i].title
@@ -59,7 +59,7 @@ $(document).ready(function() {
 						//TODO: privremeno zakucano dok ne odradim upload slike na server
 						data[i].image = "images/img2.jpg";
 						
-						htmlRow = "<div class=\"col-lg-3 col-md-6\"><div class=\"item\"><img src=" + data[i].image + " width=\"90px\" height=\"150px\" alt=\"img\"><h3><a href=\"javascript:details(" + data[i].id + ")\"><strong>" + data[i].title + "</strong></a></h3><h6><span class=\"price\">" + data[i].price + " RSD</span> / <a href=\"javascript:buyBook(" + data[i].id + ")\">Buy Now</a></h6></div></div>";
+						htmlRow = "<div class=\"col-lg-3 col-md-6\"><div class=\"item\"><img src=" + data[i].image + " width=\"90px\" height=\"150px\" alt=\"img\"><h3><a href=\"javascript:details(" + data[i].id + ")\"><strong>" + data[i].title + "</strong></a></h3><h6><span class=\"price\">" + data[i].price + " RSD</span> / <a href=\"javascript:buyBook(" + data[i].id + ")\">Buy Now</a></h6></div><div style=\"padding-bottom: 30px\"></div></div>";
 						$("#bookItems").append(htmlRow);
 					}
 				}
@@ -216,9 +216,27 @@ function deleteModal(id) {
 
 
 function buyBook(id) {
-	alert('usao u buyBook: ' + id);
-	
-	
+	$.ajax({
+		url: "/book/buy/" + id,
+		type: "POST",
+		contentType: "application/json",
+		datatype: 'json',
+		crossDomain: true,
+	    headers: {  'Access-Control-Allow-Origin': '*' },
+		xhrFields: {
+			withCredentials: true
+		},
+		success: function(data){
+			if(data){
+				location.reload();
+			}else{
+				alert("Failed to buy book.");
+			}
+		},
+		error: function(data){
+			alert('ERROR!!!');
+		}
+	});	
 }
 
 
@@ -250,11 +268,68 @@ function details(id) {
 
 
 
+function searchBooks() {
+	var forma = $('form[id="searchForm"]');
+	var title = forma.find('[name=searchTitle]').val();
+	var author = forma.find('[name=searchAuthor]').val();
+			
+	if(title == ""){
+		title = "noInput";
+	}
+	if(author == ""){
+		author = "noInput";
+	}
+	
+	$.ajax({
+		url: "/book/search/" + title + "/" + author,
+		type: "GET",
+		contentType: "application/json",
+		crossDomain: true,
+	    headers: {  'Access-Control-Allow-Origin': '*' },
+		xhrFields: {
+			withCredentials: true
+		},
+		success: function(data){			
+			$("#noBooksForBuyingLabel").empty();
+			$("#bookItems").empty();
+			
+			if (data) {
+				if (data.length == 0) {
+					red = "No search result.";
+					$("#noBooksForBuyingLabel").append(red);
+					$("#noBooksForBuyingLabel").show();
+				} else {
+					red = "Search result:";
+					$("#noBooksForBuyingLabel").append(red);
+					$("#noBooksForBuyingLabel").show();
+					
+					for (i = 0; i < data.length; i++) {
+						//TODO: privremeno zakucano dok ne odradim upload slike na server
+						data[i].image = "images/img2.jpg";
+						
+						htmlRow = "<div class=\"col-lg-3 col-md-6\"><div class=\"item\"><img src=" + data[i].image + " width=\"90px\" height=\"150px\" alt=\"img\"><h3><a href=\"javascript:details(" + data[i].id + ")\"><strong>" + data[i].title + "</strong></a></h3><h6><span class=\"price\">" + data[i].price + " RSD</span> / <a href=\"javascript:buyBook(" + data[i].id + ")\">Buy Now</a></h6></div><div style=\"padding-bottom: 30px\"></div></div>";
+						$("#bookItems").append(htmlRow);
+					}
+				}
+			} else{
+				alert("Error when trying to display books with a given title and/or author.");
+			}
+		},
+		error: function(data){
+			alert('ERROR!!!');
+		}
+	});
+}
+
+
+
+function reload() {
+	location.reload();
+}
+
+
+
 //TODO: upload image to server (admin)
-//TODO: buy book (visitor)
-//TODO: view shopping cart content (visitor)
-//TODO: pay order (visitor)
-//TODO: search all books (visitor)
 //TODO: check password - login (MyUserController)
 
 

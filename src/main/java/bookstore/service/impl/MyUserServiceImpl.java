@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import bookstore.model.MyUser;
 import bookstore.model.Role;
 import bookstore.repository.MyUserRepository;
+import bookstore.repository.ShoppingCartRepository;
 import bookstore.service.MyUserService;
 
 @Service
@@ -34,6 +35,9 @@ public class MyUserServiceImpl implements MyUserService {
 	
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	ShoppingCartRepository shoppingCartRepository;
 	
 	public void setCurrentUser(MyUser user) {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
@@ -99,6 +103,8 @@ public class MyUserServiceImpl implements MyUserService {
 	    
 	    //encoded
 	    user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+	    
+	    shoppingCartRepository.save(user.getShoppingCart());
 		return myUserRepository.save(user);
 	}
 	

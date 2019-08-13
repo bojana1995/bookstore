@@ -134,4 +134,67 @@ public class BookController {
 		return new ResponseEntity<Book>(deleteBook, HttpStatus.NOT_FOUND);
 	}
 	
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping(value="/buy/{id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Book> buy(@PathVariable Long id) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
+		MyUser myUser = myUserService.getCurrentUser();
+		String encryptedString = Encryptor.decrypt(myUser.getEmail());
+		
+		Book book = bookService.findOne(id);
+					
+		boolean purchased = false;
+		
+		if(myUser != null && myUser.getUserType().equals(UserType.VISITOR) && book != null) {			
+			for(int i = 0; i < myUser.getShoppingCart().getBooks().size(); i++) {
+				if(myUser.getShoppingCart().getBooks().get(i).getId().equals(book.getId())) {
+					purchased = true;
+				}
+			}
+			
+			if(!purchased) {
+				myUser.getShoppingCart().getBooks().add(book);
+				myUserService.save(myUser);
+				logger.info("\n\t\tUser " + encryptedString + " has purchased a book " + book.getTitle() + ".\n");
+				return new ResponseEntity<Book>(book, HttpStatus.OK);
+			} else {
+				logger.info("\n\t\tUser " + encryptedString + " has already purchased the book " + book.getTitle() + ".\n");
+				return new ResponseEntity<Book>(book, HttpStatus.OK);
+			}
+		}
+		
+		logger.info("\n\t\tFailed to buy book " + book.getTitle() + ".");
+		return new ResponseEntity<Book>(book, HttpStatus.NOT_FOUND);
+	}
+	
+	@RequestMapping(value = "/{idCurrentlyActive}/booksInMyShoppingCart", method = RequestMethod.GET)
+	public ResponseEntity<List<Book>> booksInMyShoppingCart(@PathVariable Long idCurrentlyActive) {
+		MyUser myUser = myUserService.findOne(idCurrentlyActive);
+		
+		if (myUser == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<List<Book>>(myUser.getShoppingCart().getBooks(), HttpStatus.OK);
+	}
+	
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping(value = "/search/{title}/{author}", method = RequestMethod.GET)
+	public ResponseEntity<List<Book>> search(@PathVariable String title, @PathVariable String author) {
+		MyUser myUser = myUserService.getCurrentUser();
+		
+		if (myUser != null) {
+			if(title.equals("noInput") && author.equals("noInput")) {
+				return new ResponseEntity<List<Book>>(bookService.findAll(), HttpStatus.OK);
+			} else if(!title.equals("noInput") && author.equals("noInput")) {
+				return new ResponseEntity<List<Book>>(bookService.findByTitleIgnoreCaseContaining(title), HttpStatus.OK);
+			} else if(title.equals("noInput") && !author.equals("noInput")) {
+				return new ResponseEntity<List<Book>>(bookService.findByAuthorIgnoreCaseContaining(author), HttpStatus.OK);
+			} else {
+				return new ResponseEntity<List<Book>>(bookService.findByTitleIgnoreCaseContainingAndAuthorIgnoreCaseContaining(title, author), HttpStatus.OK);
+			}
+		}
+						
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
 }

@@ -15,7 +15,7 @@ public class ShoppingCart {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToMany(mappedBy="shoppingCart")
+	@OneToMany//(mappedBy="shoppingCart")
     private List<Book> books;
 	
 	public ShoppingCart() {}

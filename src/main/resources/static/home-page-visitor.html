@@ -56,14 +56,11 @@
                             </li>
                         </ul>
                         <div class="cart my-2 my-lg-0">
-                            <span>
-                                <i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
-                            <span class="quntity">3</span>
-                        </div>
-                        <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search here..." aria-label="Search">
-                            <span class="fa fa-search"></span>
-                        </form>
+                        	<a href="#" onclick="shoppingCartContent();return false;">
+		                    	<span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+		                        <span class="quntity">3</span>
+		                    </a>
+	                    </div>
                     </div>
                 </nav>
             </div>
@@ -145,6 +142,12 @@
 										<div class="panel">
 											<div class="panel-inner">
 												<div style="padding-top:20px" class="container">
+													<form id="searchForm" style="padding-bottom:30px" class="form-inline my-2 my-lg-0">
+							                            <input name="searchTitle" class="form-control mr-sm-2" type="text" placeholder="title..." aria-label="Search">
+							                            <input name="searchAuthor" class="form-control mr-sm-2" type="text" placeholder="author..." aria-label="Search">
+							                            <a href="#" onclick="searchBooks();return false;"><span style="padding-left:15px" class="fa fa-search"></span></a>
+							                        	<a href="#" onclick="reload();return false;"><span style="padding-left:30px"></span>Reload page</a>
+							                        </form>
 													<label id="noBooksForBuyingLabel"></label>
 													<div class="recomended-sec">
 										                <div id="bookItems" class="row"></div>
@@ -161,6 +164,39 @@
 					</div>
 					<div class="loader-wrapper hidden">
 						<i class="loader-icon"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="static about-sec">
+		<div class="container">
+			<div class="col-xs-12">
+				<div class="row">
+					<div class="col-md-12">
+						<h5 style="color:orange; padding-bottom:15px; padding-left:15px"><b><i><span id="shoppingCartContentLabel" class="row"></span></i></b></h5>
+						<table id="shoppingCartContentTable" class="table table-hover table-bordered" style="background-color: white"></table>
+						<div id="divPayOrder" class="col-md-12"></div>
+					</div>					
+				</div>
+			</div>
+			<div id="modalPaymentType" class="modal" tabindex="-1" role="dialog">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Pay order</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p><i>Please choose a payment method:</i></p>
+						</div>
+						<div class="modal-footer">
+							<button id="btnPayPal" type="button" class="btn yellow">PayPal</button>
+							<button id="btnBitcoin" type="button" class="btn black">Bitcoin</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -253,6 +289,7 @@
     <script src="js/register-login-logout.js"></script>
     <script src="js/user.js"></script>
     <script src="js/book.js"></script>
+    <script src="js/shoppingCart.js"></script>
     <script src="js/sendMessage.js"></script>
 </body>
 

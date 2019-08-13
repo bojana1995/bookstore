@@ -13,11 +13,9 @@ public interface BookService {
 
 	Book findOne(Long id);	
 	List<Book> findAll();	
-	List<Book> findByTitle(String title);	
-	List<Book> findAuthor(String author);
-	List<Book> findByPublishingYear(int publishingYear);
-	List<Book> findByPublisher(String publisher);
-	List<Book> findByPrice(double price);
+	List<Book> findByTitleIgnoreCaseContaining(String title);	
+	List<Book> findByAuthorIgnoreCaseContaining(String author);
+	List<Book> findByTitleIgnoreCaseContainingAndAuthorIgnoreCaseContaining(String title, String author);	
 	
 	Book save(Book book);
 	

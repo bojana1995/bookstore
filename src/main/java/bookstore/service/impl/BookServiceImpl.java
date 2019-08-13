@@ -28,28 +28,18 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public List<Book> findByTitle(String title) {
-		return bookRepository.findByTitle(title);
+	public List<Book> findByTitleIgnoreCaseContaining(String title) {
+		return bookRepository.findByTitleIgnoreCaseContaining(title);
 	}
 
 	@Override
-	public List<Book> findAuthor(String author) {
-		return bookRepository.findByAuthor(author);
+	public List<Book> findByAuthorIgnoreCaseContaining(String author) {
+		return bookRepository.findByAuthorIgnoreCaseContaining(author);
 	}
-
+	
 	@Override
-	public List<Book> findByPublishingYear(int publishingYear) {
-		return bookRepository.findByPublishingYear(publishingYear);
-	}
-
-	@Override
-	public List<Book> findByPublisher(String publisher) {
-		return bookRepository.findByPublisher(publisher);
-	}
-
-	@Override
-	public List<Book> findByPrice(double price) {
-		return bookRepository.findByPrice(price);
+	public List<Book> findByTitleIgnoreCaseContainingAndAuthorIgnoreCaseContaining(String title, String author) {
+		return bookRepository.findByTitleIgnoreCaseContainingAndAuthorIgnoreCaseContaining(title, author);
 	}
 
 	@Override

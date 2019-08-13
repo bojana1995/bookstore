@@ -85,7 +85,7 @@ function register(){
 
 
 
-function login(){
+function login(){	
 	var forma = $('form[id="loginForm"]');
 	var email = forma.find('[name=email]').val();
 	var password = forma.find('[name=password]').val();
@@ -121,8 +121,6 @@ function login(){
 		}
 	});
 }
-
-
 
 function logout() {
 	$.ajax({

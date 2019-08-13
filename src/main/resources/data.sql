@@ -13,12 +13,12 @@ insert into role_permission(id_role, id_permission) values (2, 1);
 
 
 -- book
-insert into book(id, author, description, price, publisher, publishing_year, title, id_shopping_cart)
-values(1, 'Antoan De Sent Egziperi', 'An amazing story about a boyfriend who befriended a rose.', 849, 'MagicBook publishing', 2010, 'The little prince', null);
-insert into book(id, author, description, price, publisher, publishing_year, title, id_shopping_cart)
-values(2, 'Ivo Andric', 'The writer discharges the current mood, seeing an occurrence, personality, impression from the path or thought that preoccupies him.', 489, 'Delfi publishing', 2017, 'Road signs', null);
-insert into book(id, author, description, price, publisher, publishing_year, title, id_shopping_cart)
-values(3, 'Henrih Sjenkjevic', 'An adventure novel that follows the perilous journey of two young men through the wild African deserts and rainforests.', 1475, 'Code publishing', 2009, 'Through the desert and the rainforest', null);
+insert into book(id, author, description, price, publisher, publishing_year, title)
+values(1, 'Antoan De Sent Egziperi', 'An amazing story about a boyfriend who befriended a rose.', 849, 'MagicBook publishing', 2010, 'The little prince');
+insert into book(id, author, description, price, publisher, publishing_year, title)
+values(2, 'Ivo Andric', 'The writer discharges the current mood, seeing an occurrence, personality, impression from the path or thought that preoccupies him.', 489, 'Delfi publishing', 2017, 'Road signs');
+insert into book(id, author, description, price, publisher, publishing_year, title)
+values(3, 'Henrih Sjenkjevic', 'An adventure novel that follows the perilous journey of two young men through the wild African deserts and rainforests.', 1475, 'Code publishing', 2009, 'Through the desert and the rainforest');
 
 
 -- shopping_cart

@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Book {
@@ -32,10 +30,6 @@ public class Book {
 	
 	@Column(nullable = false) 
 	private double price;
-	
-	@ManyToOne
-    @JoinColumn(name="id_shopping_cart", nullable = true)
-    private ShoppingCart shoppingCart;
 	
 	public Book() {}
 
