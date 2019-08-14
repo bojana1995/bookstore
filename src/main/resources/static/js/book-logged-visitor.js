@@ -200,10 +200,9 @@ function searchBooks() {
 
 
 function showModalShoppingCartContent() {
-	//$("#modalShoppingCartContent").empty();
-	modalHTML = "";
-	modalHTML = "<div class=\"modal-dialog\" role=\"document\"><div class=\"modal-content\"><div class=\"modal-header\"><h5 class=\"modal-title\" id=\"exampleModalLabel\">My shopping cart</h5><button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div><div class=\"modal-body\"><p id=\"knjige\"></p></div><div class=\"modal-footer\"><button type=\"button\" onClick=\"javaScript:payOrder();return false;\" class=\"btn btn-primary\">Pay order</button></div></div></div>";
-	$("#modalShoppingCartContent").append(modalHTML);
+	$("#divShoppingCartContent").empty();
+	modalHTML = "<div id=\"modalShoppingCartContent\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\"><div class=\"modal-dialog\" role=\"document\"><div class=\"modal-content\"><div class=\"modal-header\"><h5 class=\"modal-title\">My shopping cart</h5><button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div><div class=\"modal-body\"><p id=\"knjige\"></p></div><div class=\"modal-footer\"><button type=\"button\" onClick=\"javaScript:paypal();return false;\" class=\"btn orange\">PayPal</button><button type=\"button\" onClick=\"javaScript:bitcoin();return false;\" class=\"btn black\">Bitcoin</button></div></div></div></div>";
+	$("#divShoppingCartContent").append(modalHTML);
 	
 	$.ajax({
 		url: "/myUser/getCurrentlyActive",
@@ -223,6 +222,7 @@ function showModalShoppingCartContent() {
 						$("#knjige").append(red);
 					} else {
 						$("#knjige").empty();
+						red = "";
 						
 						for (i = 0; i < data.length; i++) {
 							red += "<div class=\"item\" style=\"padding:30px\"><img src=\"images/product1.jpg\" width=\"90px\" height=\"150px\" alt=\"img\"><h3><strong>" + data[i].title + "</strong></h3><h6><span class=\"price\" style=\"color:red\"><b>" + data[i].price + "</b> RSD</span></h6></div><div style=\"padding-bottom: 30px\"></div><br><br><br>";						
@@ -253,4 +253,32 @@ function showModalShoppingCartContent() {
 	});
 			
 	$("#modalShoppingCartContent").modal();
+}
+
+
+
+function paypal() {
+	swal({
+		title: "",
+		text: "You will be redirected to a PayPal payment page.",
+		icon: "success",
+		timer: 2000,
+		buttons: false
+	}).then(() => {
+		location.href = "https://developer.paypal.com/developer/accounts/"
+	});
+}
+
+
+
+function bitcoin() {
+	swal({
+		title: "",
+		text: "You will be redirected to a Bitcoin payment page.",
+		icon: "success",
+		timer: 2000,
+		buttons: false
+	}).then(() => {
+		location.href = "https://sandbox.coingate.com/"
+	});
 }

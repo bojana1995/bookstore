@@ -19,21 +19,22 @@ $(document).ready(function() {
 		success : function(data) {
 			if (data) {
 				if (data.length == 0) {
-					red = "No visitors available.";
-					$("#noVisitorsLabel").append(red);
-					$("#noVisitorsLabel").show();
+					$("#visitorsLabel").empty();
+					$("#visitorsTable").empty();
+					
+					red = "No registered visitors available.";
+					$("#visitorsLabel").append(red);
+					
 				} else {
-					red = "Please select visitor you want to delete:";
-					$("#noVisitorsLabel").append(red);
-					$("#noVisitorsLabel").show();
-					$("#visitorsTable").append("<thead><tr><th scope=\"col\" class=\"text-center\">Name</th><th scope=\"col\" class=\"text-center\">Surname</th><th scope=\"col\" class=\"text-center\">Address</th><th scope=\"col\" class=\"text-center\">Phone</th><th scope=\"col\" class=\"text-center\"></th></tr></thead><tbody>");
+					$("#visitorsLabel").empty();
+					$("#visitorsTable").empty();
+					
+					$("#visitorsTable").append("<thead><tr><th scope=\"col\" class=\"text-center\">Name</th><th scope=\"col\" class=\"text-center\">Surname</th><th scope=\"col\" class=\"text-center\"></th></tr></thead><tbody>");
 
 					for (i = 0; i < data.length; i++) {
 						noviRed = "<tr><td>" + data[i].name
 								+ "</td><td>" + data[i].surname
-								+ "</td><td>" + data[i].address
-								+ "</td><td>" + data[i].phone
-								+ "</td><td>" + "<input id=\"btnDeleteVisitor\" type=\"button\" class=\"btn yellow\" value=\"Delete\" onclick =\"deleteVisitorModal(" + data[i].id + ")\">"
+								+ "</td><td>" + "<input id=\"btnDeleteVisitor\" type=\"button\" class=\"btn yellow\" value=\"Delete\" onclick =\"deleteVisitor(" + data[i].id + ")\">"
 						$("#visitorsTable").append(noviRed);
 					}
 					
@@ -64,7 +65,7 @@ $(document).ready(function() {
 
 
 
-function updateAccount() {
+function updateAccount() {		
 	var forma = $('form[id="updateAccountForm"]');
 	var name = forma.find('[name=nameUpdate]').val();
 	var surname = forma.find('[name=surnameUpdate]').val();
@@ -122,51 +123,47 @@ function updateAccount() {
 
 
 
-function deleteVisitorModal(id){
-	$("#deleteVisitorModal").modal();
-	
-	$("#btnYesVisitor").click(function(){
-		$.ajax({
-			url: "/myUser/delete/" + id,
-			type: "DELETE",
-			contentType: "application/json",
-			datatype: 'json',
-			crossDomain: true,
-		    headers: {  'Access-Control-Allow-Origin': '*' },
-			xhrFields: {
-				withCredentials: true
-			},
-			success: function(data){
-				if(data){
-					swal({
-					     title: "",
-					     text: "User successfully deleted.",
-					     icon: "success",
-					     timer: 2000,
-					     buttons: false
-					}).then(() => {
-						location.reload();
-					});
-				}else{
-					swal({
-						  title: "",
-						  text: "Failed to delete user!",
-						  icon: "error",
-						  timer: 2000,
-						  buttons: false
-					});
-				}
-			},
-			error: function(data){
+function deleteVisitor(id){
+	$.ajax({
+		url: "/myUser/delete/" + id,
+		type: "DELETE",
+		contentType: "application/json",
+		datatype: 'json',
+		crossDomain: true,
+	    headers: {  'Access-Control-Allow-Origin': '*' },
+		xhrFields: {
+			withCredentials: true
+		},
+		success: function(data){
+			if(data){
+				swal({
+				     title: "",
+				     text: "User successfully deleted.",
+				     icon: "success",
+				     timer: 2000,
+				     buttons: false
+				}).then(() => {
+					location.reload();
+				});
+			}else{
 				swal({
 					  title: "",
-					  text: "ERROR!!!",
+					  text: "Failed to delete user!",
 					  icon: "error",
 					  timer: 2000,
 					  buttons: false
 				});
 			}
-		});	
+		},
+		error: function(data){
+			swal({
+				  title: "",
+				  text: "ERROR!!!",
+				  icon: "error",
+				  timer: 2000,
+				  buttons: false
+			});
+		}
 	});
 }
 
