@@ -30,12 +30,24 @@ $(document).ready(function() {
 					
 					$("#booksTable").append("</tbody>");
 				}
-			} else{
-				alert("Error trying to display the list of available books.");
+			} else {
+				swal({
+					  title: "",
+					  text: "Error trying to display the list of available books!",
+					  icon: "error",
+					  timer: 2000,
+					  buttons: false
+				});
 			}
 		},
 		error : function(data) {
-			alert('ERROR!!!');
+			swal({
+				  title: "",
+				  text: "ERROR!!!",
+				  icon: "error",
+				  timer: 2000,
+				  buttons: false
+			});
 		}
 	});
 	
@@ -63,12 +75,24 @@ $(document).ready(function() {
 						$("#bookItems").append(htmlRow);
 					}
 				}
-			} else{
-				alert("Error trying to display the list of available books.");
+			} else {
+				swal({
+					  title: "",
+					  text: "Error trying to display the list of available books!",
+					  icon: "error",
+					  timer: 2000,
+					  buttons: false
+				});
 			}
 		},
 		error : function(data) {
-			alert('ERROR!!!');
+			swal({
+				  title: "",
+				  text: "ERROR!!!",
+				  icon: "error",
+				  timer: 2000,
+				  buttons: false
+			});
 		}
 	});
 });
@@ -106,13 +130,31 @@ function add() {
 		},
 		success: function(data){
 			if(data){
-				location.reload();
-			}else{
-				alert("Failed to add book.");
+				swal({
+				     title: "",
+				     text: "Successfully adding a new book.",
+				     icon: "success",
+				     timer: 2000,
+				     buttons: false
+				});
+			} else {
+				swal({
+					  title: "",
+					  text: "Failed to add book!",
+					  icon: "error",
+					  timer: 2000,
+					  buttons: false
+				});
 			}
 		},
 		error: function(data){
-			alert('ERROR!!!');
+			swal({
+				  title: "",
+				  text: "ERROR!!!",
+				  icon: "error",
+				  timer: 2000,
+				  buttons: false
+			});
 		}
 	});
 }
@@ -171,13 +213,31 @@ function update(id) {
 		},
 		success: function(data){
 			if(data){
-				location.reload();
+				swal({
+				     title: "",
+				     text: "Successfully updating a book.",
+				     icon: "success",
+				     timer: 2000,
+				     buttons: false
+				});
 			}else{
-				alert("Failed to update book.");
+				swal({
+					  title: "",
+					  text: "Failed to update book!",
+					  icon: "error",
+					  timer: 2000,
+					  buttons: false
+				});
 			}
 		},
 		error: function(data){
-			alert('ERROR!!!');
+			swal({
+				  title: "",
+				  text: "ERROR!!!",
+				  icon: "error",
+				  timer: 2000,
+				  buttons: false
+			});
 		}
 	});
 }
@@ -200,13 +260,31 @@ function deleteModal(id) {
 			},
 			success: function(data){
 				if(data){
-					location.reload();
+					swal({
+					     title: "",
+					     text: "Successfully deleting a book.",
+					     icon: "success",
+					     timer: 2000,
+					     buttons: false
+					});
 				}else{
-					alert("Failed to delete book.");
+					swal({
+						  title: "",
+						  text: "Failed to delete book!",
+						  icon: "error",
+						  timer: 2000,
+						  buttons: false
+					});
 				}
 			},
 			error: function(data){
-				alert('ERROR!!!');
+				swal({
+					  title: "",
+					  text: "ERROR!!!",
+					  icon: "error",
+					  timer: 2000,
+					  buttons: false
+				});
 			}
 		});	
 	});
@@ -228,13 +306,31 @@ function buyBook(id) {
 		},
 		success: function(data){
 			if(data){
-				location.reload();
+				swal({
+				     title: "",
+				     text: "Successfully buying a book.",
+				     icon: "success",
+				     timer: 2000,
+				     buttons: false
+				});
 			}else{
-				alert("Failed to buy book.");
+				swal({
+					  title: "",
+					  text: "Failed to buy book!",
+					  icon: "error",
+					  timer: 2000,
+					  buttons: false
+				});
 			}
 		},
 		error: function(data){
-			alert('ERROR!!!');
+			swal({
+				  title: "",
+				  text: "ERROR!!!",
+				  icon: "error",
+				  timer: 2000,
+				  buttons: false
+			});
 		}
 	});	
 }
@@ -257,11 +353,23 @@ function details(id) {
 				row = "<div style=\"padding-bottom:15px\" class=\"headline-wrapper\"><h4 class=\"title\"><a class=\"panel-toggle\" data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseOne123\" aria-expanded=\"true\"><i>book details</i><i class=\"icon fa fa-angle-up\" aria-hidden=\"true\"></i></a></h4></div><div id=\"collapseOne123\" class=\"collapse\" aria-expanded=\"true\"><div class=\"content\"><div class=\"panel-group\" id=\"citystore-content-0\"><div class=\"panel\"><div class=\"panel-inner\"><section class=\"product-sec\"><div class=\"container\"><div class=\"row\"><div class=\"col-md-6 slider-sec\"><div id=\"myCarousel\" class=\"carousel slide\"><div class=\"carousel-inner\"><div class=\"active item carousel-item\" data-slide-number=\"0\"><img width=\"330px\" height=\"700px\" src=\"images/product1.jpg\" class=\"img-fluid\"></div><div class=\"item carousel-item\" data-slide-number=\"1\"><img width=\"330px\" height=\"700px\" src=\"images/product2.jpg\" class=\"img-fluid\"></div><div class=\"item carousel-item\" data-slide-number=\"2\"><img width=\"330px\" height=\"700px\" src=\"images/product3.jpg\" class=\"img-fluid\"></div></div><ul class=\"carousel-indicators list-inline\"><li class=\"list-inline-item active\"><a id=\"carousel-selector-0\" class=\"selected\" data-slide-to=\"0\" data-target=\"#myCarousel\"><img width=\"90px\" height=\"90px\" src=\"images/product1.jpg\" class=\"img-fluid\"></a></li><li class=\"list-inline-item\"><a id=\"carousel-selector-1\" data-slide-to=\"1\" data-target=\"#myCarousel\"><img width=\"90px\" height=\"90px\" src=\"images/product2.jpg\" class=\"img-fluid\"></a></li><li class=\"list-inline-item\"><a id=\"carousel-selector-2\" data-slide-to=\"2\" data-target=\"#myCarousel\"><img width=\"90px\" height=\"90px\" src=\"images/product3.jpg\" class=\"img-fluid\"></a></li></ul></div></div><div class=\"col-md-6 slider-content\"><h1 style=\"color:orange\">" + data.title +"</h1><h6>" + data.author +"</h6><h6>" + data.publisher + ", " + data.publishingYear + "</h6><h5 style=\"color:gray\"><i>" + data.description + "</i></h5><div><p><ul><li><span class=\"name\"><b>Price</b></span><span class=\"clm\">:</span><span class=\"price final\">" + data.price + " RSD*</span></li></ul></p></div></div></div></div></section></div></div></div></div></div>";
 				$("#panelBookDetails").append(row);
 			}else{
-				alert("Failed to show details about book.");
+				swal({
+					  title: "",
+					  text: "Failed to show details about book!",
+					  icon: "error",
+					  timer: 2000,
+					  buttons: false
+				});
 			}
 		},
 		error: function(data){
-			alert('ERROR!!!');
+			swal({
+				  title: "",
+				  text: "ERROR!!!",
+				  icon: "error",
+				  timer: 2000,
+				  buttons: false
+			});
 		}
 	});
 }
@@ -312,11 +420,23 @@ function searchBooks() {
 					}
 				}
 			} else{
-				alert("Error when trying to display books with a given title and/or author.");
+				swal({
+					  title: "",
+					  text: "Error when trying to display books with a given title and/or author!",
+					  icon: "error",
+					  timer: 2000,
+					  buttons: false
+				});
 			}
 		},
 		error: function(data){
-			alert('ERROR!!!');
+			swal({
+				  title: "",
+				  text: "ERROR!!!",
+				  icon: "error",
+				  timer: 2000,
+				  buttons: false
+			});
 		}
 	});
 }

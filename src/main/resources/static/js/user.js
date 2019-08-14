@@ -40,11 +40,23 @@ $(document).ready(function() {
 					$("#visitorsTable").append("</tbody>");
 				}
 			} else{
-				alert("Error trying to display the list of visitors.");
+				swal({
+					  title: "",
+					  text: "Error trying to display the list of visitors!",
+					  icon: "error",
+					  timer: 2000,
+					  buttons: false
+				});
 			}
 		},
 		error : function(data) {
-			alert('ERROR!!!');
+			swal({
+				  title: "",
+				  text: "ERROR!!!",
+				  icon: "error",
+				  timer: 2000,
+				  buttons: false
+			});
 		}
 	});
 });
@@ -79,13 +91,31 @@ function updateAccount() {
 		},
 		success: function(data){
 			if(data){
-				location.reload();
+				swal({
+				     title: "",
+				     text: "Your account was successfully updated!",
+				     icon: "success",
+				     timer: 2000,
+				     buttons: false
+				});
 			}else{
-				alert("Failed to update user account.");
+				swal({
+					  title: "",
+					  text: "Failed to update your account!",
+					  icon: "error",
+					  timer: 2000,
+					  buttons: false
+				});
 			}
 		},
 		error: function(data){
-			alert('ERROR!!!');
+			swal({
+				  title: "",
+				  text: "ERROR!!!",
+				  icon: "error",
+				  timer: 2000,
+				  buttons: false
+			});
 		}
 	});
 }
@@ -108,13 +138,33 @@ function deleteVisitorModal(id){
 			},
 			success: function(data){
 				if(data){
-					location.reload();
+					swal({
+					     title: "",
+					     text: "User successfully deleted.",
+					     icon: "success",
+					     timer: 2000,
+					     buttons: false
+					}).then(() => {
+						location.reload();
+					});
 				}else{
-					alert("Failed to delete user.");
+					swal({
+						  title: "",
+						  text: "Failed to delete user!",
+						  icon: "error",
+						  timer: 2000,
+						  buttons: false
+					});
 				}
 			},
 			error: function(data){
-				alert('ERROR!!!');
+				swal({
+					  title: "",
+					  text: "ERROR!!!",
+					  icon: "error",
+					  timer: 2000,
+					  buttons: false
+				});
 			}
 		});	
 	});

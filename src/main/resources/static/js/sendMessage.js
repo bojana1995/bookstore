@@ -23,13 +23,33 @@ function sendMessage() {
 		},
 		success: function(data){
 			if(data){
-				location.reload();
+				swal({
+				     title: "",
+				     text: "Your message was successfully sent.",
+				     icon: "success",
+				     timer: 2000,
+				     buttons: false
+				}).then(() => {
+					location.reload();
+				});
 			}else{
-				alert("Failed to send message.");
+				swal({
+					  title: "",
+					  text: "Failed to send message!",
+					  icon: "error",
+					  timer: 2000,
+					  buttons: false
+				});
 			}
 		},
 		error: function(data){
-			alert('ERROR!!!');
+			swal({
+				  title: "",
+				  text: "ERROR!!!",
+				  icon: "error",
+				  timer: 2000,
+				  buttons: false
+			});
 		}
 	});
 }

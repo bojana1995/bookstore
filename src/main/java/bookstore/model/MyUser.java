@@ -1,5 +1,6 @@
 package bookstore.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -50,7 +51,7 @@ public class MyUser {
 	@JoinColumn(name = "id_role", nullable = false)
 	private Role role;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
 	@JoinColumn(name = "id_shopping_cart", nullable = false)
 	private ShoppingCart shoppingCart;
 	

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/myBtn.css">
 </head>
 
     <header>
@@ -89,7 +90,7 @@
 														<form action="javascript:updateAccount()" id="updateAccountForm" method="POST">
 															<div class="row">
 																<div class="col-md-5">
-																	<input type="text" id="nameUpdateAccount" name="nameUpdate" placeholder="name" required autofocus>
+																	<input type="text" id="nameUpdateAccount" name="nameUpdate" placeholder="name" required>
 																	<span class="required-star">*</span>
 																</div>
 																
@@ -140,7 +141,7 @@
 														<form action="javascript:add()" id="addBookForm" method="POST">
 															<div class="row">
 																<div class="col-md-5">
-																	<input type="text" name="title" placeholder="title" required autofocus>
+																	<input type="text" name="title" placeholder="title" required>
 																	<span class="required-star">*</span>
 																</div>
 																<div class="col-md-5">
@@ -325,7 +326,7 @@
                         <form action="javascript:sendMessage()" id="sendMessageForm" method="POST">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input type="text" name="nameAndSurname" placeholder="name and surname" required autofocus>
+                                    <input type="text" name="nameAndSurname" placeholder="name and surname" required>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="email" name="email" placeholder="email" required>
@@ -361,14 +362,19 @@
             </div>
         </div>
     </footer>
+    
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><img src="images/uppButton.png" width="20px" height="20"/></button>
+    
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="js/custom.js"></script>
     <script src="js/register-login-logout.js"></script>
     <script src="js/user.js"></script>
     <script src="js/sendMessage.js"></script>
     <script src="js/book.js"></script>
+    <script src="js/myBtn.js"></script>
 </body>
 
 </html>

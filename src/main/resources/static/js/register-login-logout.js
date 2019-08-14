@@ -71,13 +71,33 @@ function register(){
 			},
 			success: function(data){
 				if(data){
-					location.href = "/index.html"				
+					swal({
+					     title: "",
+					     text: "You have successfully registered.",
+					     icon: "success",
+					     timer: 2000,
+					     buttons: false
+					}).then(() => {
+						location.href = "/index.html"
+					});
 				}else{
-					alert("Failed to register user.");
+					swal({
+						  title: "",
+						  text: "Failed to register user!",
+						  icon: "error",
+						  timer: 2000,
+						  buttons: false
+					});
 				}
 			},
 			error: function(data){
-				alert('ERROR!!!');
+				swal({
+					  title: "",
+					  text: "ERROR!!!",
+					  icon: "error",
+					  timer: 2000,
+					  buttons: false
+				});
 			}
 		});
 	}
@@ -113,11 +133,23 @@ function login(){
 				else
 					location.href = "/home-page-visitor.html"	
 			}else{
-				alert("Failed to login.");
+				swal({
+					  title: "",
+					  text: "Failed to login!",
+					  icon: "error",
+					  timer: 2000,
+					  buttons: false
+				});
 			}
 		},
 		error: function(data){
-			alert('ERROR!!!\n\n1. invalid request or\n2. wrong credentials');
+			swal({
+				  title: "",
+				  text: "ERROR!!!\n\n1. invalid request or\n2. wrong credentials",
+				  icon: "error",
+				  timer: 2000,
+				  buttons: false
+			});
 		}
 	});
 }
@@ -135,13 +167,33 @@ function logout() {
 		},
 		success: function(data){
 			if(data){
-				location.href = "/index.html"				
+				swal({
+				     title: "",
+				     text: "You have successfully logged out of the system.",
+				     icon: "success",
+				     timer: 2000,
+				     buttons: false
+				}).then(() => {
+					location.href = "/index.html"
+				});
 			}else{
-				alert("Failed logout.");
+				swal({
+					  title: "",
+					  text: "Failed logout!",
+					  icon: "error",
+					  timer: 2000,
+					  buttons: false
+				});
 			}
 		},
 		error: function(data){
-			alert('ERROR!!!');
+			swal({
+				  title: "",
+				  text: "ERROR!!!",
+				  icon: "error",
+				  timer: 2000,
+				  buttons: false
+			});
 		}
 	});	
 }

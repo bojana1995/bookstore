@@ -46,12 +46,23 @@ function shoppingCartContent() {
 						$("#divPayOrder").append(btnPayOrder);
 					}
 				} else{
-					alert("Error trying to display shopping cart content.");
+					swal({
+						  title: "",
+						  text: "Error trying to display shopping cart content!",
+						  icon: "error",
+						  timer: 2000,
+						  buttons: false
+					});
 				}
 			},
 			error: function(data){
-				alert('ERROR!!!');
-				console.log(data)
+				swal({
+					  title: "",
+					  text: "ERROR!!!",
+					  icon: "error",
+					  timer: 2000,
+					  buttons: false
+				});
 			}
 		});	
 	});
@@ -64,13 +75,27 @@ function payOrder() {
 	$("#modalPaymentType").modal();
 	
 	$("#btnPayPal").click(function(){
-		alert('You will be redirected to a PayPal payment page.')
-		location.href = "https://developer.paypal.com/developer/accounts/"
+		swal({
+			title: "",
+			text: "You will be redirected to a PayPal payment page.",
+			icon: "success",
+			timer: 2000,
+			buttons: false
+		}).then(() => {
+			location.href = "https://developer.paypal.com/developer/accounts/"
+		});
 	});
 	
 	$("#btnBitcoin").click(function(){
-		alert('You will be redirected to a Bitcoin payment page.')
-		location.href = "https://sandbox.coingate.com/"
+		swal({
+			title: "",
+			text: "You will be redirected to a Bitcoin payment page.",
+			icon: "success",
+			timer: 2000,
+			buttons: false
+		}).then(() => {
+			location.href = "https://sandbox.coingate.com/"
+		});
 	});
 }
 
