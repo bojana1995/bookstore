@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	//tabelarni prikaz - za update knjiga -> promeni
 	$.ajax({
 		url : "/book/getAll",
 		type : "GET",
@@ -7,11 +8,11 @@ $(document).ready(function() {
 		success : function(data) {
 			if (data) {
 				if (data.length == 0) {
-					red = "No books available.";
+					red = "<p style=\"color:orange\"><i><b>No books available.</b></i></p>";
 					$("#noBooksLabel").append(red);
 					$("#noBooksLabel").show();
 				} else {
-					red = "Please select the book you want to update:";
+					red = "<p style=\"color:orange\"><i><b>Please select the book you want to update:</b></i></p>";
 					$("#noBooksLabel").append(red);
 					$("#noBooksLabel").show();
 					$("#booksTable").append("<thead><tr><th scope=\"col\" class=\"text-center\"><i>Title</i></th><th scope=\"col\" class=\"text-center\"><i>Author</i></th><th scope=\"col\" class=\"text-center\"><i>Description</i></th><th scope=\"col\" class=\"text-center\"><i>Publishing year</i></th><th scope=\"col\" class=\"text-center\"><i>Publisher</i></th><th scope=\"col\" class=\"text-center\"><i>Price</i></th><th scope=\"col\" class=\"text-center\"></th><th scope=\"col\" class=\"text-center\"></th></tr></thead><tbody>");
@@ -51,6 +52,7 @@ $(document).ready(function() {
 		}
 	});
 	
+	//lep prikaz svih knjiga :) - ostaje
 	$.ajax({
 		url : "/book/getAll",
 		type : "GET",
@@ -59,11 +61,11 @@ $(document).ready(function() {
 		success : function(data) {
 			if (data) {
 				if (data.length == 0) {
-					red = "There is no book you can buy.";
+					red = "<p style=\"color:orange\"><i><b>There are currently no products available.</b></i></p>";
 					$("#noBooksForBuyingLabel").append(red);
 					$("#noBooksForBuyingLabel").show();
 				} else {
-					red = "Please select the book you want to buy:";
+					red = "<p style=\"color:orange\"><i><b>Available products:</b></i></p>";
 					$("#noBooksForBuyingLabel").append(red);
 					$("#noBooksForBuyingLabel").show();
 					
@@ -71,7 +73,7 @@ $(document).ready(function() {
 						//TODO: privremeno zakucano dok ne odradim upload slike na server
 						data[i].image = "images/img2.jpg";
 						
-						htmlRow = "<div class=\"col-lg-3 col-md-6\"><div class=\"item\"><img src=" + data[i].image + " width=\"90px\" height=\"150px\" alt=\"img\"><h3><a href=\"javascript:details(" + data[i].id + ")\"><strong>" + data[i].title + "</strong></a></h3><h6><span class=\"price\">" + data[i].price + " RSD</span> / <a href=\"javascript:buyBook(" + data[i].id + ")\">Buy Now</a></h6></div><div style=\"padding-bottom: 30px\"></div></div>";
+						htmlRow = "<div class=\"col-lg-3 col-md-6\"><div class=\"item\"><img src=" + data[i].image + " width=\"90px\" height=\"150px\" alt=\"img\"><h3><a href=\"javascript:details(" + data[i].id + ")\"><strong>" + data[i].title + "</strong></a></h3><h6><span class=\"price\">" + data[i].price + " RSD</span></h6></div><div style=\"padding-bottom: 30px\"></div></div>";
 						$("#bookItems").append(htmlRow);
 					}
 				}
@@ -293,50 +295,6 @@ function deleteModal(id) {
 
 
 
-function buyBook(id) {
-	$.ajax({
-		url: "/book/buy/" + id,
-		type: "POST",
-		contentType: "application/json",
-		datatype: 'json',
-		crossDomain: true,
-	    headers: {  'Access-Control-Allow-Origin': '*' },
-		xhrFields: {
-			withCredentials: true
-		},
-		success: function(data){
-			if(data){
-				swal({
-				     title: "",
-				     text: "Successfully buying a book.",
-				     icon: "success",
-				     timer: 2000,
-				     buttons: false
-				});
-			}else{
-				swal({
-					  title: "",
-					  text: "Failed to buy book!",
-					  icon: "error",
-					  timer: 2000,
-					  buttons: false
-				});
-			}
-		},
-		error: function(data){
-			swal({
-				  title: "",
-				  text: "ERROR!!!",
-				  icon: "error",
-				  timer: 2000,
-				  buttons: false
-			});
-		}
-	});	
-}
-
-
-
 function details(id) {
 	$("#panelBookDetails").empty();
 	
@@ -350,8 +308,9 @@ function details(id) {
 				//TODO: dodati image atribut u Book i odraditi upload slike na server
 				//prikazati data.image umesto product1.jpg
 				
-				row = "<div style=\"padding-bottom:15px\" class=\"headline-wrapper\"><h4 class=\"title\"><a class=\"panel-toggle\" data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseOne123\" aria-expanded=\"true\"><i>book details</i><i class=\"icon fa fa-angle-up\" aria-hidden=\"true\"></i></a></h4></div><div id=\"collapseOne123\" class=\"collapse\" aria-expanded=\"true\"><div class=\"content\"><div class=\"panel-group\" id=\"citystore-content-0\"><div class=\"panel\"><div class=\"panel-inner\"><section class=\"product-sec\"><div class=\"container\"><div class=\"row\"><div class=\"col-md-6 slider-sec\"><div id=\"myCarousel\" class=\"carousel slide\"><div class=\"carousel-inner\"><div class=\"active item carousel-item\" data-slide-number=\"0\"><img width=\"330px\" height=\"700px\" src=\"images/product1.jpg\" class=\"img-fluid\"></div><div class=\"item carousel-item\" data-slide-number=\"1\"><img width=\"330px\" height=\"700px\" src=\"images/product2.jpg\" class=\"img-fluid\"></div><div class=\"item carousel-item\" data-slide-number=\"2\"><img width=\"330px\" height=\"700px\" src=\"images/product3.jpg\" class=\"img-fluid\"></div></div><ul class=\"carousel-indicators list-inline\"><li class=\"list-inline-item active\"><a id=\"carousel-selector-0\" class=\"selected\" data-slide-to=\"0\" data-target=\"#myCarousel\"><img width=\"90px\" height=\"90px\" src=\"images/product1.jpg\" class=\"img-fluid\"></a></li><li class=\"list-inline-item\"><a id=\"carousel-selector-1\" data-slide-to=\"1\" data-target=\"#myCarousel\"><img width=\"90px\" height=\"90px\" src=\"images/product2.jpg\" class=\"img-fluid\"></a></li><li class=\"list-inline-item\"><a id=\"carousel-selector-2\" data-slide-to=\"2\" data-target=\"#myCarousel\"><img width=\"90px\" height=\"90px\" src=\"images/product3.jpg\" class=\"img-fluid\"></a></li></ul></div></div><div class=\"col-md-6 slider-content\"><h1 style=\"color:orange\">" + data.title +"</h1><h6>" + data.author +"</h6><h6>" + data.publisher + ", " + data.publishingYear + "</h6><h5 style=\"color:gray\"><i>" + data.description + "</i></h5><div><p><ul><li><span class=\"name\"><b>Price</b></span><span class=\"clm\">:</span><span class=\"price final\">" + data.price + " RSD*</span></li></ul></p></div></div></div></div></section></div></div></div></div></div>";
-				$("#panelBookDetails").append(row);
+				modalBookDetailHTML = "<div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\"><div class=\"modal-content\"><div class=\"modal-header\"><h5 class=\"modal-title\">" + data.title + "</h5><button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div><div class=\"modal-body\"><div class=\"container\"><div class=\"row\"><div><div id=\"myCarousel\" class=\"carousel slide\"><div class=\"carousel-inner\"><div class=\"active item carousel-item\" data-slide-number=\"0\"><img src=\"images/product1.jpg\" style=\"width:235px; height:390px\"></div><div class=\"item carousel-item\" data-slide-number=\"1\"><img src=\"images/product2.jpg\" style=\"width:235px; height:390px\"></div><div class=\"item carousel-item\" data-slide-number=\"2\"><img src=\"images/product3.jpg\" style=\"width:235px; height:390px\"></div><ul class=\"carousel-indicators list-inline\"><li class=\"list-inline-item active\"><a id=\"carousel-selector-0\" class=\"selected\" data-slide-to=\"0\" data-target=\"#myCarousel\"><img src=\"images/product1.jpg\" style=\"width:100px; height:130px\"></a></li><li class=\"list-inline-item\"><a id=\"carousel-selector-1\" data-slide-to=\"1\" data-target=\"#myCarousel\"><img src=\"images/product2.jpg\" style=\"width:100px; height:130px\"></a></li><li class=\"list-inline-item\"><a id=\"carousel-selector-2\" data-slide-to=\"2\" data-target=\"#myCarousel\"><img src=\"images/product3.jpg\" style=\"width:100px; height:130px\"></a></li></ul></div></div></div><div class=\"col-md-2 col-md-3 col-md-4 col-md-2\"><p><h6>" + data.author + "</h6></p><p><h6>" + data.publisher + ", " + data.publishingYear + "</h6></p><br><p><h6><i>" + data.description + "</i></h6></p><br><p><span class=\"name\">Price</span><span class=\"clm\">: </span><span style=\"color:red\"><b>" + data.price + " RSD</b></span></p></div></div></div></div></div></div></div>";
+				$("#bookDetails").append(modalBookDetailHTML);
+				$("#bookDetails").modal();
 			}else{
 				swal({
 					  title: "",
@@ -375,7 +334,7 @@ function details(id) {
 }
 
 
-
+//nema Buy now dugme
 function searchBooks() {
 	var forma = $('form[id="searchForm"]');
 	var title = forma.find('[name=searchTitle]').val();
@@ -403,11 +362,11 @@ function searchBooks() {
 			
 			if (data) {
 				if (data.length == 0) {
-					red = "No search result.";
+					red = "<p style=\"color:orange\"><i><b>No search results.</b></i></p>";
 					$("#noBooksForBuyingLabel").append(red);
 					$("#noBooksForBuyingLabel").show();
 				} else {
-					red = "Search result:";
+					red = "<p style=\"color:orange\"><i><b>Search results:</b></i></p>";
 					$("#noBooksForBuyingLabel").append(red);
 					$("#noBooksForBuyingLabel").show();
 					
@@ -415,7 +374,7 @@ function searchBooks() {
 						//TODO: privremeno zakucano dok ne odradim upload slike na server
 						data[i].image = "images/img2.jpg";
 						
-						htmlRow = "<div class=\"col-lg-3 col-md-6\"><div class=\"item\"><img src=" + data[i].image + " width=\"90px\" height=\"150px\" alt=\"img\"><h3><a href=\"javascript:details(" + data[i].id + ")\"><strong>" + data[i].title + "</strong></a></h3><h6><span class=\"price\">" + data[i].price + " RSD</span> / <a href=\"javascript:buyBook(" + data[i].id + ")\">Buy Now</a></h6></div><div style=\"padding-bottom: 30px\"></div></div>";
+						htmlRow = "<div class=\"col-lg-3 col-md-6\"><div class=\"item\"><img src=" + data[i].image + " width=\"90px\" height=\"150px\" alt=\"img\"><h3><a href=\"javascript:details(" + data[i].id + ")\"><strong>" + data[i].title + "</strong></a></h3><h6><span class=\"price\">" + data[i].price + " RSD</span></h6></div><div style=\"padding-bottom: 30px\"></div></div>";
 						$("#bookItems").append(htmlRow);
 					}
 				}
@@ -430,6 +389,7 @@ function searchBooks() {
 			}
 		},
 		error: function(data){
+			alert(data)
 			swal({
 				  title: "",
 				  text: "ERROR!!!",
@@ -439,12 +399,6 @@ function searchBooks() {
 			});
 		}
 	});
-}
-
-
-
-function reload() {
-	location.reload();
 }
 
 

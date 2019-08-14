@@ -57,7 +57,7 @@
                             </li>
                         </ul>
                         <div class="cart my-2 my-lg-0">
-                        	<a href="#" onclick="shoppingCartContent();return false;">
+                        	<a href="#" onclick="showModalShoppingCartContent();return false;">
 		                    	<span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
 		                        <span class="quntity">3</span>
 		                    </a>
@@ -75,109 +75,99 @@
             <span class="breadcrumb-item active"><label id="currentlyActive"></label></span>
         </div>
     </div>
-    
-    <section class="static about-sec">
+
+	<section class="static about-sec">
 		<div class="container">
-			<div class="col-xs-12">
-				<div class="block accordian article">
-					<div class="panel-wrapper">
+			<div class="block accordian article">
+				<div class="row">
+					<div class="column" style="width: 30%; padding: 25px;">
 						<div class="panel">
-							<div style="padding-bottom:30px" class="headline-wrapper">
-								<h4 class="title"><a class="panel-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne0" aria-expanded="true"><i>update account</i><i class="icon fa fa-angle-up" aria-hidden="true"></i></a></h4>
+							<div style="padding-bottom: 15px" class="headline-wrapper">
+								<h4 class="title">
+									<a class="panel-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne1"><i>update account</i></a>
+								</h4>
 							</div>
 
-							<div id="collapseOne0" class="collapse in" aria-expanded="true" style="">
+							<div id="collapseOne1" class="collapse">
 								<div class="content">
-									<div class="panel-group" id="citystore-content-0">
+									<div class="panel-group" id="citystore-content-1">
 										<div class="panel">
-											<div class="panel-inner">
-												<div style="padding-top:20px" class="container">
-													<p>Please complete the following fields:</p>
-													<div class="form">
-														<form action="javascript:updateAccount()" id="updateAccountForm" method="POST">
-															<div class="row">
-																<div class="col-md-5">
-																	<input type="text" id="nameUpdateAccount" name="nameUpdate" placeholder="name" required>
-																	<span class="required-star">*</span>
-																</div>
-																
-																<div class="col-md-5">
-																	<input type="text" id="surnameUpdateAccount" name="surnameUpdate" placeholder="surname" required>
-																	<span class="required-star">*</span>
-																</div>
-																
-																<div class="col-md-5">
-																	<input type="text" id="addressUpdateAccount" name="addressUpdate" placeholder="address" required>
-																	<span class="required-star">*</span>
-																</div>
-																
-																<div class="col-md-5">
-																	<input type="number" id="phoneUpdateAccount" name="phoneUpdate" placeholder="phone" required>
-																	<span class="required-star">*</span>
-																</div>
-																
-																<div class="col-md-11" id="divValidationUpdateAccount"></div>
-																
-																<div class="col-lg-8 col-md-12">
-																	<button class="btn black" id="btnUpdate" type="submit">Update</button>
-																</div>
+											<div style="padding-top: 20px" class="panel-inner">
+												<p><i>Please complete the following fields:</i></p>
+												<div class="form">
+													<form action="javascript:updateAccount()" id="updateAccountForm" method="POST">
+														<div class="row">
+															<div class="col-md-11">
+																<input type="text" id="nameUpdateAccount" name="nameUpdate" placeholder="name" required>
+																<span class="required-star">*</span>
 															</div>
-														</form>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					
-						<div class="panel">
-							<div style="padding-bottom:15px" class="headline-wrapper">
-								<h4 class="title"><a class="panel-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne1" aria-expanded="true"><i>buy book</i><i class="icon fa fa-angle-up" aria-hidden="true"></i></a></h4>
-							</div>
 
-							<div id="collapseOne1" class="collapse" aria-expanded="true" style="">
-								<div class="content">
-									<div class="panel-group" id="citystore-content-0">
-										<div class="panel">
-											<div class="panel-inner">
-												<div style="padding-top:20px" class="container">
-													<form id="searchForm" style="padding-bottom:30px" class="form-inline my-2 my-lg-0">
-							                            <input name="searchTitle" class="form-control mr-sm-2" type="text" placeholder="title..." aria-label="Search">
-							                            <input name="searchAuthor" class="form-control mr-sm-2" type="text" placeholder="author..." aria-label="Search">
-							                            <a href="#" onclick="searchBooks();return false;"><span style="padding-left:15px" class="fa fa-search"></span></a>
-							                        	<a href="#" onclick="reload();return false;"><span style="padding-left:30px"></span>Reload page</a>
-							                        </form>
-													<label id="noBooksForBuyingLabel"></label>
-													<div class="recomended-sec">
-										                <div id="bookItems" class="row"></div>
-										            </div>
+															<div class="col-md-11">
+																<input type="text" id="surnameUpdateAccount" name="surnameUpdate" placeholder="surname" required>
+																<span class="required-star">*</span>
+															</div>
+
+															<div class="col-md-11">
+																<input type="text" id="addressUpdateAccount" name="addressUpdate" placeholder="address" required>
+																<span class="required-star">*</span>
+															</div>
+
+															<div class="col-md-11">
+																<input type="number" id="phoneUpdateAccount" name="phoneUpdate" placeholder="phone" required>
+																<span class="required-star">*</span>
+															</div>
+
+															<div class="col-md-11" id="divValidationUpdateAccount"></div>
+
+															<div class="col-md-2 col-md-3">
+																<button class="btn black" id="btnUpdate" type="submit">Update</button>
+															</div>
+														</div>
+													</form>
 												</div>
+
+
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						
-						<div id="panelBookDetails" class="panel"></div>
 					</div>
-					<div class="loader-wrapper hidden">
-						<i class="loader-icon"></i>
+				
+
+					<div class="column" style="width: 70%; padding: 25px;">
+						<form id="searchForm" style="padding-bottom: 30px" class="form-inline my-2 my-lg-0">
+							<input name="searchTitle" class="form-control mr-sm-2" type="text" placeholder="title..." aria-label="Search"> 
+							<input name="searchAuthor" class="form-control mr-sm-2" type="text" placeholder="author..." aria-label="Search"> 
+							<a href="#" onclick="searchBooks();return false;"><span style="padding-left: 15px" class="fa fa-search"></span></a>
+						</form>
+						<label id="noBooksForBuyingLabel"></label>
+						<div class="recomended-sec">
+							<div id="bookItems" class="row"></div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+
+	<section class="product-sec">
+		<div class="modal" id="bookDetails" tabindex="-1" role="dialog"></div>
+    </section>
 	
 	<section class="static about-sec">
 		<div class="container">
 			<div class="col-xs-12">
 				<div class="row">
 					<div class="col-md-12">
-						<h5 style="color:orange; padding-bottom:15px; padding-left:15px"><b><i><span id="shoppingCartContentLabel" class="row"></span></i></b></h5>
+						<!-- <h5 style="color:orange; padding-bottom:15px; padding-left:15px"><b><i><span id="shoppingCartContentLabel" class="row"></span></i></b></h5>
 						<table id="shoppingCartContentTable" class="table table-hover table-bordered" style="background-color: white"></table>
+							 -->					
+						<div id="modalShoppingCartContent" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+							
+						</div>
+
 						<div id="divPayOrder" class="col-md-12"></div>
 					</div>					
 				</div>
@@ -293,7 +283,7 @@
     <script src="js/custom.js"></script>
     <script src="js/register-login-logout.js"></script>
     <script src="js/user.js"></script>
-    <script src="js/book.js"></script>
+    <script src="js/book-logged-visitor.js"></script>
     <script src="js/shoppingCart.js"></script>
     <script src="js/sendMessage.js"></script>
     <script src="js/myBtn.js"></script>

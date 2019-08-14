@@ -220,7 +220,7 @@ public class MyUserController {
 		MyUser myUser = myUserService.getCurrentUser();
 		
 		if(myUser != null) {
-			String encryptedString = Encryptor.encrypt(myUser.getEmail());
+			String encryptedString = Encryptor.decrypt(myUser.getEmail());
 			
 			myUser.setName(request.getName());
 			myUser.setSurname(request.getSurname());

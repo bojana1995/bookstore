@@ -19,6 +19,10 @@ insert into book(id, author, description, price, publisher, publishing_year, tit
 values(2, 'Ivo Andric', 'The writer discharges the current mood, seeing an occurrence, personality, impression from the path or thought that preoccupies him.', 489, 'Delfi publishing', 2017, 'Road signs');
 insert into book(id, author, description, price, publisher, publishing_year, title)
 values(3, 'Henrih Sjenkjevic', 'An adventure novel that follows the perilous journey of two young men through the wild African deserts and rainforests.', 1475, 'Code publishing', 2009, 'Through the desert and the rainforest');
+insert into book(id, author, description, price, publisher, publishing_year, title)
+values(4, 'Nora Roberts', 'The sickness came on suddenly, and spread quickly. The fear spread even faster. Within weeks, everything people counted on began to fail them.', 779, 'MagicBook publishing', 2019, 'Year one');
+insert into book(id, author, description, price, publisher, publishing_year, title)
+values(5, 'Cecily von Ziegesar', 'Welcome to New York Citys Upper East Side, where the girls are dazzling, the guys are gorgeous, and the summer heat is the perfect excuse to throw a fabulous roof-deck pool party.', 399, 'Laguna publishing', 2014, 'Only in your dreams');
 
 
 -- shopping_cart

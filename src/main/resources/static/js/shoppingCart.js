@@ -17,33 +17,16 @@ function shoppingCartContent() {
 			},
 			success: function(data){
 				if (data) {
-					$("#shoppingCartContentLabel").empty();
-					$("#shoppingCartContentTable").empty();
-					
 					if (data.length == 0) {
-						red = "Shopping cart is empty.";
-						$("#shoppingCartContentLabel").append(red);
-						$("#shoppingCartContentLabel").show();
+						//red = "<p style=\"color:orange\"><i><b>Shopping cart is empty.</b></i></p>";
+						//$("#labelShoppingCartContent").append(red);
 					} else {
-						red = "Products ordered:";
-						$("#shoppingCartContentLabel").append(red);
-						$("#shoppingCartContentLabel").show();
-						$("#shoppingCartContentTable").append("<thead><tr><th scope=\"col\" class=\"text-center\"><i>Title</i></th><th scope=\"col\" class=\"text-center\"><i>Author</i></th><th scope=\"col\" class=\"text-center\"><i>Description</i></th><th scope=\"col\" class=\"text-center\"><i>Publishing year</i></th><th scope=\"col\" class=\"text-center\"><i>Publisher</i></th><th scope=\"col\" class=\"text-center\"><i>Price</i></th></tr></thead><tbody>");
+						//red = "<p style=\"color:orange\"><i><b>Products ordered:</b></i></p>";
+						//$("#labelShoppingCartContent").append(red);
 						
 						for (i = 0; i < data.length; i++) {
-							noviRed = "<tr><td>" + data[i].title
-									+ "</td><td>" + data[i].author
-									+ "</td><td>" + data[i].description
-									+ "</td><td>" + data[i].publishingYear
-									+ "</td><td>" + data[i].publisher
-									+ "</td><td>" + data[i].price
-							$("#shoppingCartContentTable").append(noviRed);
+							
 						}
-						
-						$("#shoppingCartContentTable").append("</tbody>");
-						
-						btnPayOrder = "<a href=\"#\" onclick=\"payOrder();return false;\"><button class=\"btn yellow\" style=\"float:right\">Pay order</button></a>";
-						$("#divPayOrder").append(btnPayOrder);
 					}
 				} else{
 					swal({

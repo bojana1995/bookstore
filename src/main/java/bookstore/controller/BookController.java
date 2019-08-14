@@ -177,24 +177,17 @@ public class BookController {
 		return new ResponseEntity<List<Book>>(myUser.getShoppingCart().getBooks(), HttpStatus.OK);
 	}
 	
-	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/search/{title}/{author}", method = RequestMethod.GET)
 	public ResponseEntity<List<Book>> search(@PathVariable String title, @PathVariable String author) {
-		MyUser myUser = myUserService.getCurrentUser();
-		
-		if (myUser != null) {
-			if(title.equals("noInput") && author.equals("noInput")) {
-				return new ResponseEntity<List<Book>>(bookService.findAll(), HttpStatus.OK);
-			} else if(!title.equals("noInput") && author.equals("noInput")) {
-				return new ResponseEntity<List<Book>>(bookService.findByTitleIgnoreCaseContaining(title), HttpStatus.OK);
-			} else if(title.equals("noInput") && !author.equals("noInput")) {
-				return new ResponseEntity<List<Book>>(bookService.findByAuthorIgnoreCaseContaining(author), HttpStatus.OK);
-			} else {
-				return new ResponseEntity<List<Book>>(bookService.findByTitleIgnoreCaseContainingAndAuthorIgnoreCaseContaining(title, author), HttpStatus.OK);
-			}
+		if(title.equals("noInput") && author.equals("noInput")) {
+			return new ResponseEntity<List<Book>>(bookService.findAll(), HttpStatus.OK);
+		} else if(!title.equals("noInput") && author.equals("noInput")) {
+			return new ResponseEntity<List<Book>>(bookService.findByTitleIgnoreCaseContaining(title), HttpStatus.OK);
+		} else if(title.equals("noInput") && !author.equals("noInput")) {
+			return new ResponseEntity<List<Book>>(bookService.findByAuthorIgnoreCaseContaining(author), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<List<Book>>(bookService.findByTitleIgnoreCaseContainingAndAuthorIgnoreCaseContaining(title, author), HttpStatus.OK);
 		}
-						
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
 }
