@@ -78,104 +78,54 @@
 	<section class="static about-sec">
 		<div class="container">
 			<div class="col-xs-12">
-				<div class="block accordian article">
-					<div class="panel-wrapper">					
-						<div class="panel">
-							<div style="padding-bottom:15px" class="headline-wrapper">
-								<h4 class="title"><a class="panel-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne1" aria-expanded="true"><i>add book</i><i class="icon fa fa-angle-up" aria-hidden="true"></i></a></h4>
-							</div>
-
-							<div id="collapseOne1" class="collapse" aria-expanded="true" style="">
-								<div class="content">
-									<div class="panel-group" id="citystore-content-0">
-										<div class="panel">
-											<div class="panel-inner">
-												<div style="padding-top:20px" class="container">
-													<p>Please complete the following fields:</p>
-													<div class="form">
-														<form action="javascript:add()" id="addBookForm" method="POST">
-															<div class="row">
-																<div class="col-md-5">
-																	<input type="text" name="title" placeholder="title" required>
-																	<span class="required-star">*</span>
-																</div>
-																<div class="col-md-5">
-																	<input type="text" name="author" placeholder="author" required>
-																	<span class="required-star">*</span>
-																</div>
-																<div class="col-md-5">
-																	<input type="text" name="description" placeholder="description" required>
-																	<span class="required-star">*</span>
-																</div>
-																<div class="col-md-5">
-																	<input type="number" name="publishingYear" placeholder="publishing year" required>
-																	<span class="required-star">*</span>
-																</div>
-																<div class="col-md-5">
-																	<input type="text" name="publisher" placeholder="publisher" required>
-																	<span class="required-star">*</span>
-																</div>
-																<div class="col-md-5">
-																	<input type="number" name="price" placeholder="price" required>
-																	<span class="required-star">*</span>
-																</div>
-																<div class="col-md-11" id="divValidation"></div>
-																<div class="col-lg-8 col-md-12">
-																	<button class="btn black" id="btnAdd" type="submit">Add</button>
-																</div>
-															</div>
-														</form>
-													</div>
-												</div>
-											</div>
-										</div>
+				<div class="row">
+					<div class="column" style="width: 20%; padding: 15px;">
+						<button type="button" class="btn black" data-toggle="modal" data-target="#modalAddBook">Add book</button>
+						<div id="modalAddBook" class="modal" tabindex="-1" role="dialog">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" style="color:orange">Add book</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
 									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="panel">
-							<div style="padding-bottom:15px" class="headline-wrapper">
-								<h4 class="title"><a class="panel-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne2" aria-expanded="true"><i>update or delete book</i><i class="icon fa fa-angle-up" aria-hidden="true"></i></a></h4>
-							</div>
-
-							<div id="collapseOne2" class="collapse" aria-expanded="true" style="">
-								<div class="content">
-									<div class="panel-group" id="citystore-content-0">
-										<div class="panel">
-											<div class="panel-inner">
-												<div class="container">
-													<div class="form">
-														<div class="row">
-															<div class="col-md-10">
-																<h5><b><i><span id="noBooksLabel" class="row"></span></i></b></h5>
-																<table id="booksTable" class="table table-hover table-bordered" style="background-color: white"></table>
-															</div>
+									<div class="modal-body">
+										<div style="padding-top: 15px">
+											<p><i>Please complete the following fields:</i></p>
+											<div class="form">
+												<form action="javascript:addBook()" id="addBookForm" method="POST">
+													<div class="row">
+														<div class="col-md-5">
+															<input type="text" name="title" placeholder="title" required>
+															<span class="required-star">*</span>
+														</div>
+														<div class="col-md-5">
+															<input type="text" name="author" placeholder="author" required>
+															<span class="required-star">*</span>
+														</div>
+														<div class="col-md-5">
+															<input type="text" name="description" placeholder="description" required>
+															<span class="required-star">*</span>
+														</div>
+														<div class="col-md-5">
+															<input type="number" name="publishingYear" placeholder="publishing year" required>
+															<span class="required-star">*</span>
+														</div>
+														<div class="col-md-5">
+															<input type="text" name="publisher" placeholder="publisher" required>
+															<span class="required-star">*</span>
+														</div>
+														<div class="col-md-5">
+															<input type="number" name="price" placeholder="price" required>
+															<span class="required-star">*</span>
+														</div>
+														<div class="col-md-11" id="divValidation"></div>
+														<div class="col-lg-8 col-md-12">
+															<button class="btn yellow" id="btnAdd" type="submit">Add</button>
 														</div>
 													</div>
-													
-													<div class="form" id="divUpdateBookForm"></div>
-
-													<div id="deleteBookModal" class="modal" tabindex="-1" role="dialog">
-														<div class="modal-dialog" role="document">
-															<div class="modal-content">
-																<div class="modal-header">
-																	<h5 class="modal-title">Delete book</h5>
-																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																		<span aria-hidden="true">&times;</span>
-																	</button>
-																</div>
-																<div class="modal-body">
-																	<p><i>Are you sure you want to delete book?</i></p>
-																</div>
-																<div class="modal-footer">
-																	<button id="btnYes" type="button" class="btn yellow">Yes</button>
-																	<button type="button" class="btn black" data-dismiss="modal">No</button>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
+												</form>
 											</div>
 										</div>
 									</div>
@@ -183,9 +133,68 @@
 							</div>
 						</div>
 					</div>
-					<div class="loader-wrapper hidden">
-						<i class="loader-icon"></i>
+					
+					<div class="column" style="width: 80%; padding: 15px;">
+						<div class="block accordian article">
+							<div class="row">
+								<div class="column" style="width: 100%; padding: 15px;">
+									<form id="searchForm" style="padding-bottom: 30px" class="form-inline my-2 my-lg-0">
+										<input name="searchTitle" class="form-control mr-sm-2" type="text" placeholder="title..." aria-label="Search"> 
+										<input name="searchAuthor" class="form-control mr-sm-2" type="text" placeholder="author..." aria-label="Search"> 
+										<a href="#" onclick="searchBooks();return false;"><span style="padding-left: 15px" class="fa fa-search"></span></a>
+									</form>
+									<label id="noBooksForBuyingLabel"></label>
+									<div class="recomended-sec">
+										<div id="bookItemsAdmin" class="row"></div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="product-sec">
+		<div class="modal" id="bookDetails" tabindex="-1" role="dialog"></div>
+    </section>
+    
+    <section class="product-sec">
+		<div id="modalUpdateBook" class="modal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" style="color: orange">Update book</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="col-md-11" id="divUpdateBookForm"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="product-sec">
+		<div id="modalDeleteBook" class="modal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" style="color: orange">Delete book</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" id="divDeleteBook">
+						<p><i>Are you sure you want to delete selected book?</i></p>
+					</div>
+					<div class="modal-footer">
+			        	<button type="button" class="btn yellow" id="btnYesDeleteBookModal">Yes</button>
+			        	<button type="button" class="btn black" id="btnNoDeleteBookModal">No</button>
+			      </div>
 				</div>
 			</div>
 		</div>
@@ -257,7 +266,35 @@
 														<div style="padding: 15px" id="divValidationChangePassword"></div>
 														
 														<div class="col-md-2 col-md-3">
-															<button class="btn yellow" id="btnChange password" type="submit">Change</button>
+															<button class="btn yellow" type="submit">Change</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							
+							<form action="javaScript:deactivateAccount()" method="POST">
+								<div class="panel">
+									<div class="headline-wrapper">
+										<div style="padding-top: 30px; padding-left: 15px">
+											<a class="panel-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne5" style="color:orange"><i>Deactivate account</i></a>
+										</div>
+									</div>
+	
+									<div id="collapseOne5" class="collapse">
+										<div class="content">
+											<div class="panel-group" id="citystore-content-4">
+												<div class="panel">
+													<div class="panel-inner">
+														<div style="padding: 15px">
+															<p><i>Are you sure you want to deactivate your user account?</i></p>
+														</div>
+														
+														<div class="col-md-2 col-md-3">
+															<button class="btn yellow" type="submit">Yes</button>
 														</div>
 													</div>
 												</div>
@@ -283,9 +320,8 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body">
-						<label id="visitorsLabel"></label>
-						<table id="visitorsTable" class="table table-hover table-bordered" style="background-color: white"></table>
+					<div class="modal-body" id="divBodyModalVisitors">
+						<label id="labelNoVisitors"></label>
 					</div>
 				</div>
 			</div>
@@ -379,11 +415,11 @@
     <script type="text/javascript" src="js/owl.carousel.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="js/custom.js"></script>
-    <script src="js/register-login-logout.js"></script>
-    <script src="js/user.js"></script>
-    <script src="js/sendMessage.js"></script>
-    <script src="js/book-logged-admin.js"></script>
-    <script src="js/myBtn.js"></script>
+    <script src="js/myJS/sharedFunctionalities.js"></script>
+    <script src="js/myJS/user.js"></script>
+    <script src="js/myJS/admin.js"></script>
+    <script src="js/myJS/message.js"></script>
+    <script src="js/myJS/myBtn.js"></script>
 </body>
 
 </html>

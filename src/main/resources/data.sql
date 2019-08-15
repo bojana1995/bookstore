@@ -23,6 +23,14 @@ insert into book(id, author, description, price, publisher, publishing_year, tit
 values(4, 'Nora Roberts', 'The sickness came on suddenly, and spread quickly. The fear spread even faster. Within weeks, everything people counted on began to fail them.', 779, 'MagicBook publishing', 2019, 'Year one');
 insert into book(id, author, description, price, publisher, publishing_year, title)
 values(5, 'Cecily von Ziegesar', 'Welcome to New York Citys Upper East Side, where the girls are dazzling, the guys are gorgeous, and the summer heat is the perfect excuse to throw a fabulous roof-deck pool party.', 399, 'Laguna publishing', 2014, 'Only in your dreams');
+insert into book(id, author, description, price, publisher, publishing_year, title)
+values(6, 'Haled Hoseini', 'This powerful debut novel tells the story of fierce cruelty and fierce love being redeemed.', 699, 'Contrast publishing', 2015, 'Dragon hunter');
+insert into book(id, author, description, price, publisher, publishing_year, title)
+values(7, 'Amanda Quick', 'Step into a world where dark secrets lurk behind the most glittering illusions. Desperately ready for a fresh start, she will accept the job...', 623, 'MagicBook publishing', 2016, 'Daydreaming');
+insert into book(id, author, description, price, publisher, publishing_year, title)
+values(8, 'Fjodor Mihajlovic Dostojevski', 'Rodion Romanovich Raskoljnikov, an ambitious law student, decides to kill and rob Alyona Ivanovna, a hated old woman who exploits people with interest.', 1359, 'Delfi publishing', 2012, 'Crime and punishment');
+insert into book(id, author, description, price, publisher, publishing_year, title)
+values(9, 'Sophie Kinsella', 'When a handsome stranger in a cafe asks her to keep his laptop for a moment, Fixie not only agrees but ultimately saves the laptop from disaster. To thank her, the owner of the computer, Sebastian quickly fills the bill...', 829, 'Code publishing', 2013, 'I owe you');
 
 
 -- shopping_cart

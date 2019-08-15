@@ -91,7 +91,7 @@
 						</form>
 						<label id="noBooksForBuyingLabel"></label>
 						<div class="recomended-sec">
-							<div id="bookItems" class="row"></div>
+							<div id="bookItemsVisitor" class="row"></div>
 						</div>
 					</div>
 				</div>
@@ -102,38 +102,14 @@
 	<section class="product-sec">
 		<div class="modal" id="bookDetails" tabindex="-1" role="dialog"></div>
     </section>
-	
-	<section class="static about-sec">
+    
+    <section class="static about-sec">
 		<div class="container">
 			<div class="col-xs-12">
 				<div class="row">
 					<div class="col-md-12">
-						<!-- <h5 style="color:orange; padding-bottom:15px; padding-left:15px"><b><i><span id="shoppingCartContentLabel" class="row"></span></i></b></h5>
-						<table id="shoppingCartContentTable" class="table table-hover table-bordered" style="background-color: white"></table>
-							 -->					
 						<div id="divShoppingCartContent"></div>
-
-						<div id="divPayOrder" class="col-md-12"></div>
 					</div>					
-				</div>
-			</div>
-			<div id="modalPaymentType" class="modal" tabindex="-1" role="dialog">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title">Pay order</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<p><i>Please choose a payment method:</i></p>
-						</div>
-						<div class="modal-footer">
-							<button id="btnPayPal" type="button" class="btn yellow">PayPal</button>
-							<button id="btnBitcoin" type="button" class="btn black">Bitcoin</button>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -205,7 +181,35 @@
 														<div style="padding: 15px" id="divValidationChangePassword"></div>
 														
 														<div class="col-md-2 col-md-3">
-															<button class="btn yellow" id="btnChange password" type="submit">Change</button>
+															<button class="btn yellow" type="submit">Change</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							
+							<form action="javaScript:deactivateAccount()" method="POST">
+								<div class="panel">
+									<div class="headline-wrapper">
+										<div style="padding-top: 30px; padding-left: 15px">
+											<a class="panel-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne5" style="color:orange"><i>Deactivate account</i></a>
+										</div>
+									</div>
+	
+									<div id="collapseOne5" class="collapse">
+										<div class="content">
+											<div class="panel-group" id="citystore-content-4">
+												<div class="panel">
+													<div class="panel-inner">
+														<div style="padding: 15px">
+															<p><i>Are you sure you want to deactivate your user account?</i></p>
+														</div>
+														
+														<div class="col-md-2 col-md-3">
+															<button class="btn yellow" type="submit">Yes</button>
 														</div>
 													</div>
 												</div>
@@ -308,11 +312,11 @@
     <script type="text/javascript" src="js/owl.carousel.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="js/custom.js"></script>
-    <script src="js/register-login-logout.js"></script>
-    <script src="js/user.js"></script>
-    <script src="js/book-logged-visitor.js"></script>
-    <script src="js/sendMessage.js"></script>
-    <script src="js/myBtn.js"></script>
+    <script src="js/myJS/sharedFunctionalities.js"></script>
+    <script src="js/myJS/user.js"></script>
+    <script src="js/myJS/visitor.js"></script>
+    <script src="js/myJS/message.js"></script>
+    <script src="js/myJS/myBtn.js"></script>
 </body>
 
 </html>
