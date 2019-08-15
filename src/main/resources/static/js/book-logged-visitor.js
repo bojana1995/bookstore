@@ -201,7 +201,7 @@ function searchBooks() {
 
 function showModalShoppingCartContent() {
 	$("#divShoppingCartContent").empty();
-	modalHTML = "<div id=\"modalShoppingCartContent\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\"><div class=\"modal-dialog\" role=\"document\"><div class=\"modal-content\"><div class=\"modal-header\"><h5 class=\"modal-title\">My shopping cart</h5><button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div><div class=\"modal-body\"><p id=\"knjige\"></p></div><div class=\"modal-footer\"><button type=\"button\" onClick=\"javaScript:paypal();return false;\" class=\"btn orange\">PayPal</button><button type=\"button\" onClick=\"javaScript:bitcoin();return false;\" class=\"btn black\">Bitcoin</button></div></div></div></div>";
+	modalHTML = "<div id=\"modalShoppingCartContent\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\"><div class=\"modal-dialog\" role=\"document\"><div class=\"modal-content\"><div class=\"modal-header\"><h5 class=\"modal-title\">My shopping cart</h5><button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div><div class=\"modal-body\"><p id=\"knjige\"></p></div><div class=\"modal-footer\"><button id=\"btnPaypal\" type=\"button\" onClick=\"javaScript:paypal();return false;\" class=\"btn orange\">PayPal</button><button type=\"button\" id=\"btnBitcoin\" onClick=\"javaScript:bitcoin();return false;\" class=\"btn black\">Bitcoin</button></div></div></div></div>";
 	$("#divShoppingCartContent").append(modalHTML);
 	
 	$.ajax({
@@ -220,6 +220,9 @@ function showModalShoppingCartContent() {
 					if (data.length == 0) {
 						red = "<p><i><b>Your shopping cart is empty.</b></i></p>";
 						$("#knjige").append(red);
+						
+						$("#btnPaypal").hide();
+						$("#btnBitcoin").hide();
 					} else {
 						$("#knjige").empty();
 						red = "";

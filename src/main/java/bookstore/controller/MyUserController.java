@@ -237,6 +237,25 @@ public class MyUserController {
 	}
 	
 	@PreAuthorize("isAuthenticated()")
+	@RequestMapping(value="/changePassword", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<MyUser> changePassword(@RequestBody MyUserDTO request) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
+		MyUser myUser = myUserService.getCurrentUser();
+		
+		if(myUser != null) {
+			String encryptedString = Encryptor.decrypt(myUser.getEmail());
+			
+			myUser.setPassword(request.getPassword());
+						
+			myUserService.save(myUser);
+			logger.info("\n\t\tUser " + encryptedString + " has changed his password.\n");
+			return new ResponseEntity<MyUser>(myUser, HttpStatus.OK);
+		}
+		
+		logger.info("\n\t\tAn error occurred when " + request.getEmail() +"tried to change his password.");
+		return new ResponseEntity<MyUser>(myUser, HttpStatus.NOT_FOUND);
+	}
+	
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value="/delete/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<MyUser> delete(@PathVariable Long id) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
 		MyUser myUser = myUserService.getCurrentUser();

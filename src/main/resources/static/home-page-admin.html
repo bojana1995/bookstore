@@ -223,11 +223,47 @@
 									<input type="number" id="phoneUpdateAccount" name="phoneUpdate" placeholder="phone" required> 
 									<span class="required-star" style="color: red">*</span>
 								</div>
-		
+								
 								<div style="padding: 15px" id="divValidationUpdateAccount"></div>
 		
 								<div class="col-md-2 col-md-3">
-									<button class="btn yellow" id="btnUpdate" type="submit">Update</button>
+									<button class="btn black" id="btnUpdate" type="submit">Update</button>
+								</div>
+							</form>
+								
+							<form action="javaScript:changePassword()" id="changePasswordForm" method="POST">
+								<div class="panel">
+									<div class="headline-wrapper">
+										<div style="padding-top: 30px; padding-left: 15px">
+											<a class="panel-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne4" style="color:orange"><i>Change password</i></a>
+										</div>
+									</div>
+	
+									<div id="collapseOne4" class="collapse">
+										<div class="content">
+											<div class="panel-group" id="citystore-content-4">
+												<div class="panel">
+													<div class="panel-inner">
+														<div style="padding: 15px">
+															<input type="password" id="passwordUpdateAccount" name="passwordUpdate" placeholder="password" required> 
+															<span class="required-star" style="color: red">*</span>
+														</div>
+														
+														<div style="padding: 15px">
+															<input type="password" id="passwordUpdateAccount2" name="passwordUpdate2" placeholder="reenter password" required> 
+															<span class="required-star" style="color: red">*</span>
+														</div>
+														
+														<div style="padding: 15px" id="divValidationChangePassword"></div>
+														
+														<div class="col-md-2 col-md-3">
+															<button class="btn yellow" id="btnChange password" type="submit">Change</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</form>
 						</div>
