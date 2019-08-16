@@ -8,6 +8,7 @@ public class BookDTO {
 	private String publishingYear;
 	private String publisher;
 	private String price;
+	private String image;
 	
 	public BookDTO() {}
 
@@ -57,6 +58,14 @@ public class BookDTO {
 
 	public void setPrice(String price) {
 		this.price = price;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 }

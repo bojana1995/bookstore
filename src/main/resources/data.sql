@@ -13,24 +13,24 @@ insert into role_permission(id_role, id_permission) values (2, 1);
 
 
 -- book
-insert into book(id, author, description, price, publisher, publishing_year, title)
-values(1, 'Antoan De Sent Egziperi', 'An amazing story about a boyfriend who befriended a rose.', 849, 'MagicBook publishing', 2010, 'The little prince');
-insert into book(id, author, description, price, publisher, publishing_year, title)
-values(2, 'Ivo Andric', 'The writer discharges the current mood, seeing an occurrence, personality, impression from the path or thought that preoccupies him.', 489, 'Delfi publishing', 2017, 'Road signs');
-insert into book(id, author, description, price, publisher, publishing_year, title)
-values(3, 'Henrih Sjenkjevic', 'An adventure novel that follows the perilous journey of two young men through the wild African deserts and rainforests.', 1475, 'Code publishing', 2009, 'Through the desert and the rainforest');
-insert into book(id, author, description, price, publisher, publishing_year, title)
-values(4, 'Nora Roberts', 'The sickness came on suddenly, and spread quickly. The fear spread even faster. Within weeks, everything people counted on began to fail them.', 779, 'MagicBook publishing', 2019, 'Year one');
-insert into book(id, author, description, price, publisher, publishing_year, title)
-values(5, 'Cecily von Ziegesar', 'Welcome to New York Citys Upper East Side, where the girls are dazzling, the guys are gorgeous, and the summer heat is the perfect excuse to throw a fabulous roof-deck pool party.', 399, 'Laguna publishing', 2014, 'Only in your dreams');
-insert into book(id, author, description, price, publisher, publishing_year, title)
-values(6, 'Haled Hoseini', 'This powerful debut novel tells the story of fierce cruelty and fierce love being redeemed.', 699, 'Contrast publishing', 2015, 'Dragon hunter');
-insert into book(id, author, description, price, publisher, publishing_year, title)
-values(7, 'Amanda Quick', 'Step into a world where dark secrets lurk behind the most glittering illusions. Desperately ready for a fresh start, she will accept the job...', 623, 'MagicBook publishing', 2016, 'Daydreaming');
-insert into book(id, author, description, price, publisher, publishing_year, title)
-values(8, 'Fjodor Mihajlovic Dostojevski', 'Rodion Romanovich Raskoljnikov, an ambitious law student, decides to kill and rob Alyona Ivanovna, a hated old woman who exploits people with interest.', 1359, 'Delfi publishing', 2012, 'Crime and punishment');
-insert into book(id, author, description, price, publisher, publishing_year, title)
-values(9, 'Sophie Kinsella', 'When a handsome stranger in a cafe asks her to keep his laptop for a moment, Fixie not only agrees but ultimately saves the laptop from disaster. To thank her, the owner of the computer, Sebastian quickly fills the bill...', 829, 'Code publishing', 2013, 'I owe you');
+insert into book(id, author, description, image, price, publisher, publishing_year, title)
+values(1, 'Antoine de Saint-Exupery', 'An amazing story about a boyfriend who befriended a rose.', 'images/book_theLittlePrince.jpg', 849, 'MagicBook publishing', 2010, 'The little prince');
+insert into book(id, author, description, image, price, publisher, publishing_year, title)
+values(2, 'Ivo Andric', 'The writer discharges the current mood, seeing an occurrence, personality, impression from the path or thought that preoccupies him.', 'images/book_signsByTheRoadside.jpg', 489, 'Delfi publishing', 2017, 'Signs by the roadside');
+insert into book(id, author, description, image, price, publisher, publishing_year, title)
+values(3, 'Henrik Sjenkjevic', 'An adventure novel that follows the perilous journey of two young men through the wild African deserts and rainforests.', 'images/book_throughTheDesertAndTheRainforest.jpg', 1475, 'Code publishing', 2009, 'Through the desert and the rainforest');
+insert into book(id, author, description, image, price, publisher, publishing_year, title)
+values(4, 'Nora Roberts', 'The sickness came on suddenly, and spread quickly. The fear spread even faster. Within weeks, everything people counted on began to fail them.', 'images/book_yearOne.jpg', 779, 'MagicBook publishing', 2019, 'Year one');
+insert into book(id, author, description, image, price, publisher, publishing_year, title)
+values(5, 'Cecily von Ziegesar', 'Welcome to New York Citys Upper East Side, where the girls are dazzling, the guys are gorgeous, and the summer heat is the perfect excuse to throw a fabulous roof-deck pool party.', 'images/book_onlyInYourDreams.jpg', 399, 'Laguna publishing', 2014, 'Only in your dreams');
+insert into book(id, author, description, image, price, publisher, publishing_year, title)
+values(6, 'Khaled Hosseini', 'This powerful debut novel tells the story of fierce cruelty and fierce love being redeemed.', 'images/book_theKiteRunner.jpg', 699, 'Contrast publishing', 2015, 'The kite runner');
+insert into book(id, author, description, image, price, publisher, publishing_year, title)
+values(7, 'Amanda Quick', 'Driven by dark, smoldering passions and a tragic secret buried deep within his soul, Blade has all of London cowering at his feet, but not Emily...', 'images/book_scandal.jpg', 623, 'MagicBook publishing', 2016, 'Scandal');
+insert into book(id, author, description, image, price, publisher, publishing_year, title)
+values(8, 'Fyodor Dostoevsky', 'Rodion Romanovich Raskoljnikov, an ambitious law student, decides to kill and rob Alyona Ivanovna, a hated old woman who exploits people with interest.', 'images/book_crimeAndPunishment.jpg', 1359, 'Delfi publishing', 2012, 'Crime and punishment');
+insert into book(id, author, description, image, price, publisher, publishing_year, title)
+values(9, 'Sophie Kinsella', 'When a handsome stranger in a cafe asks her to keep his laptop for a moment, Fixie not only agrees but ultimately saves the laptop from disaster. To thank her, the owner of the computer, Sebastian quickly fills the bill...', 'images/book_iOweYouOne.jpg', 829, 'Code publishing', 2013, 'I owe you one');
 
 
 -- shopping_cart

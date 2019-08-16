@@ -13,7 +13,7 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false) 
+	@Column(nullable = false, unique = true) 
 	private String title;
 	
 	@Column(nullable = false) 
@@ -30,6 +30,9 @@ public class Book {
 	
 	@Column(nullable = false) 
 	private double price;
+	
+	@Column(nullable = false) 
+	private String image;
 	
 	public Book() {}
 
@@ -88,5 +91,13 @@ public class Book {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}	
 	
 }

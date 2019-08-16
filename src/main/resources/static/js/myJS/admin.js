@@ -53,6 +53,9 @@ function addBook() {
 	var publishingYear = forma.find('[name=publishingYear]').val();
 	var publisher = forma.find('[name=publisher]').val();
 	var price = forma.find('[name=price]').val();
+	
+	var path = document.getElementById("image");
+	image = "images/" + path.value.split("\\")[2];
 			
 	formData = JSON.stringify({
 		title:$("#addBookForm [name='title']").val(),
@@ -60,7 +63,8 @@ function addBook() {
 		description:$("#addBookForm [name='description']").val(),
 		publishingYear:$("#addBookForm [name='publishingYear']").val(),
 		publisher:$("#addBookForm [name='publisher']").val(),
-		price:$("#addBookForm [name='price']").val()
+		price:$("#addBookForm [name='price']").val(),
+		image:image
 	});
 			
 	$.ajax({

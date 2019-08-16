@@ -80,6 +80,7 @@ public class BookController {
 				book.setPublishingYear(Integer.parseInt(request.getPublishingYear()));
 				book.setPublisher(request.getPublisher());
 				book.setPrice(Double.parseDouble(request.getPrice()));
+				book.setImage(request.getImage());
 				
 				bookService.save(book);
 				logger.info("\n\t\tUser " + decryptedString + " added a book " + book.getTitle() + ".\n");
