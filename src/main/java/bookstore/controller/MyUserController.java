@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import bookstore.Encryptor;
+import bookstore.annotation.PermissionAnnotation;
 import bookstore.dto.MyUserDTO;
 import bookstore.model.MyUser;
 import bookstore.model.ShoppingCart;
@@ -290,6 +291,7 @@ public class MyUserController {
 	}
 	
 	@PreAuthorize("isAuthenticated()")
+	@PermissionAnnotation(name = "DELETE_VISITOR")
 	@RequestMapping(value="/delete/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<MyUser> delete(@PathVariable Long id) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
 		MyUser myUser = myUserService.getCurrentUser();

@@ -196,15 +196,18 @@ function logout() {
 		},
 		success: function(data){
 			if(data){
-				swal({
-				     title: "",
-				     text: "You have successfully logged out of the system.",
-				     icon: "success",
-				     timer: 2000,
-				     buttons: false
-				}).then(() => {
-					location.href = "/index.html"
+				window.swal({
+					title: "Logging out...",
+					text: "Please wait",
+					icon: "images/logout.gif",
+					timer: 2000,
+					buttons: false
 				});
+					
+				setTimeout(() => {
+					location.href = "/index.html"
+				}, 2000);
+				
 			}else{
 				swal({
 					  title: "",

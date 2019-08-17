@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import bookstore.Encryptor;
+import bookstore.annotation.PermissionAnnotation;
 import bookstore.dto.BookDTO;
 import bookstore.model.Book;
 import bookstore.model.MyUser;
@@ -66,6 +67,7 @@ public class BookController {
 	}
 	
 	@PreAuthorize("isAuthenticated()")
+	@PermissionAnnotation(name = "ADD_BOOK")
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Book> add(@RequestBody BookDTO request) throws InvalidKeyException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException, NoSuchPaddingException, NoSuchAlgorithmException {		
 		MyUser myUser = myUserService.getCurrentUser();	
@@ -93,6 +95,7 @@ public class BookController {
 	}
 	
 	@PreAuthorize("isAuthenticated()")
+	@PermissionAnnotation(name = "UPDATE_BOOK")
 	@RequestMapping(value="/update/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Book> update(@RequestBody BookDTO request, @PathVariable Long id) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
 		MyUser myUser = myUserService.getCurrentUser();
@@ -118,6 +121,7 @@ public class BookController {
 	}
 	
 	@PreAuthorize("isAuthenticated()")
+	@PermissionAnnotation(name = "DELETE_BOOK")
 	@RequestMapping(value="/delete/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Book> delete(@PathVariable Long id) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
 		MyUser myUser = myUserService.getCurrentUser();
@@ -152,6 +156,7 @@ public class BookController {
 	}
 	
 	@PreAuthorize("isAuthenticated()")
+	@PermissionAnnotation(name = "BUY_BOOK")
 	@RequestMapping(value="/buy/{id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Book> buy(@PathVariable Long id) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException {
 		MyUser myUser = myUserService.getCurrentUser();
@@ -202,6 +207,7 @@ public class BookController {
 		return new ResponseEntity<Book>(book, HttpStatus.NOT_FOUND);
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/{idCurrentlyActive}/booksInMyShoppingCart", method = RequestMethod.GET)
 	public ResponseEntity<List<Book>> booksInMyShoppingCart(@PathVariable Long idCurrentlyActive) {
 		MyUser myUser = myUserService.findOne(idCurrentlyActive);

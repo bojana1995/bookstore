@@ -4,12 +4,19 @@ insert into role(id, name) values (2, 'VISITOR');
 
 
 -- permisson
-insert into permission(id, name) values (1, 'permission1');
+insert into permission(id, name) values (1, 'ADD_BOOK');
+insert into permission(id, name) values (2, 'UPDATE_BOOK');
+insert into permission(id, name) values (3, 'DELETE_BOOK');
+insert into permission(id, name) values (4, 'DELETE_VISITOR');
+insert into permission(id, name) values (5, 'BUY_BOOK');
 
 
 -- role_permission
 insert into role_permission(id_role, id_permission) values (1, 1);
-insert into role_permission(id_role, id_permission) values (2, 1);
+insert into role_permission(id_role, id_permission) values (1, 2);
+insert into role_permission(id_role, id_permission) values (1, 3);
+insert into role_permission(id_role, id_permission) values (1, 4);
+insert into role_permission(id_role, id_permission) values (2, 5);
 
 
 -- book
