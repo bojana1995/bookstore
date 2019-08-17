@@ -215,15 +215,27 @@ function deleteBook(id) {
 			xhrFields: {
 				withCredentials: true
 			},
-			success: function(data){
+			success: function(data, statusText, xhr){
 				if(data){
-					swal({
-					     title: "",
-					     text: "Successfully deleting a book.",
-					     icon: "success",
-					     timer: 2000,
-					     buttons: false
-					});
+					var status = xhr.status;
+					
+					if(status == 200){					
+						swal({
+						     title: "",
+						     text: "Successfully deleting a book.",
+						     icon: "success",
+						     timer: 2000,
+						     buttons: false
+						});
+					} else {
+						swal({
+						     title: "Deletion disabled",
+						     text: "The book has already been ordered!",
+						     icon: "error",
+						     timer: 2000,
+						     buttons: false
+						});
+					}
 					
 					$('#modalDeleteBook').modal('toggle');
 					window.setTimeout(function(){location.reload();},1500);

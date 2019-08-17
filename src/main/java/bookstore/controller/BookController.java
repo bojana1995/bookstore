@@ -124,8 +124,24 @@ public class BookController {
 		String encryptedString = Encryptor.decrypt(myUser.getEmail());
 		
 		Book deleteBook = bookService.findOne(id);
+		boolean purchased = false;
 		
 		if(myUser != null && myUser.getUserType().equals(UserType.ADMIN) && deleteBook != null) {
+			List<MyUser> visitors = myUserService.findByUserType(UserType.VISITOR);
+			for(int i = 0; i < visitors.size(); i++) {
+				for(int j = 0; j < visitors.get(i).getShoppingCart().getBooks().size(); j++) {
+					if(visitors.get(i).getShoppingCart().getBooks().get(j).equals(deleteBook)) {
+						purchased = true;
+						
+						if(purchased) {
+							logger.info("\n\t\tIt is not possible to delete book " + deleteBook.getTitle() + " because it has already been ordered by the buyer.\n");
+							return new ResponseEntity<Book>(deleteBook, HttpStatus.ACCEPTED); //202
+						}
+					}
+				}
+			}
+			
+			
 			bookService.delete(deleteBook.getId());
 			logger.info("\n\t\tUser " + encryptedString + " has deleted book " + deleteBook.getTitle() + ".\n");
 			return new ResponseEntity<Book>(deleteBook, HttpStatus.OK);
@@ -143,23 +159,42 @@ public class BookController {
 		
 		Book book = bookService.findOne(id);
 					
-		boolean purchased = false;
+		boolean iPurchasedTheBook = false;
+		boolean somebodyElsePurchasedTheBook = false;
 		
 		if(myUser != null && myUser.getUserType().equals(UserType.VISITOR) && book != null) {			
-			for(int i = 0; i < myUser.getShoppingCart().getBooks().size(); i++) {
-				if(myUser.getShoppingCart().getBooks().get(i).getId().equals(book.getId())) {
-					purchased = true;
+			List<MyUser> otherVisitors = myUserService.findAll();
+			for(int i = 0; i < otherVisitors.size(); i++) {
+				if(otherVisitors.get(i).equals(myUser)) {
+					otherVisitors.remove(i);
 				}
 			}
 			
-			if(!purchased) {
+			for(int j = 0; j < otherVisitors.size(); j++) {
+				for(int k = 0 ; k < otherVisitors.get(j).getShoppingCart().getBooks().size(); k++) {
+					if(otherVisitors.get(j).getShoppingCart().getBooks().get(k).equals(book)) {
+						somebodyElsePurchasedTheBook = true;
+					}
+				}
+			}			
+			
+			for(int i = 0; i < myUser.getShoppingCart().getBooks().size(); i++) {
+				if(myUser.getShoppingCart().getBooks().get(i).getId().equals(book.getId())) {
+					iPurchasedTheBook = true;
+				}
+			}
+			
+			if(!iPurchasedTheBook && !somebodyElsePurchasedTheBook) {
 				myUser.getShoppingCart().getBooks().add(book);
 				myUserService.save(myUser);
 				logger.info("\n\t\tUser " + encryptedString + " has purchased a book " + book.getTitle() + ".\n");
 				return new ResponseEntity<Book>(book, HttpStatus.OK);
+			} else if(iPurchasedTheBook) {
+				logger.info("\n\t\tUser " + encryptedString + " has already purchased the book " + book.getTitle() + ".\n");
+				return new ResponseEntity<Book>(book, HttpStatus.ACCEPTED); //202
 			} else {
 				logger.info("\n\t\tUser " + encryptedString + " has already purchased the book " + book.getTitle() + ".\n");
-				return new ResponseEntity<Book>(book, HttpStatus.OK);
+				return new ResponseEntity<Book>(book, HttpStatus.NON_AUTHORITATIVE_INFORMATION); //203
 			}
 		}
 		

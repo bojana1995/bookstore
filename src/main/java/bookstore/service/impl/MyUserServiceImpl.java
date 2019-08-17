@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import bookstore.model.MyUser;
 import bookstore.model.Role;
+import bookstore.model.UserType;
 import bookstore.repository.MyUserRepository;
 import bookstore.repository.ShoppingCartRepository;
 import bookstore.service.MyUserService;
@@ -66,6 +67,10 @@ public class MyUserServiceImpl implements MyUserService {
 	
 	public MyUser findByEmail(String email) {
 		return myUserRepository.findByEmail(email);
+	}
+	
+	public List<MyUser> findByUserType(UserType userType) {
+		return myUserRepository.findByUserType(userType);
 	}
 	
 	public List<MyUser> findByRole(Role role) {

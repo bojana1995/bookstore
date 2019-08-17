@@ -163,16 +163,22 @@ public class MyUserController {
 		MyUser myUser = myUserService.findByEmail(encryptedString);
 		
 		if(myUser != null) {
-			if(myUser.getEmail().equals(encryptedString) /*&& bCryptPasswordEncoder.matches(request.getPassword(), u.getPassword())*/ && myUser.isActivatedAccount() == true) {			
-				myUserService.setCurrentUser(myUser);
-				logger.info("\n\t\tUser " + request.getEmail() + " logged on to the system.\n");
-				return new ResponseEntity<MyUser>(myUser, HttpStatus.OK);
+			if(myUser.isActivatedAccount() == false) {
+				logger.info("\n\t\tUser account not activated.\n");
+				return new ResponseEntity<MyUser>(myUser, HttpStatus.NOT_FOUND);
 			} else {
-				System.out.println("\n\t\tWrong credentials.\n");
+				if (myUser.getEmail().equals(encryptedString) /*&& bCryptPasswordEncoder.matches(request.getPassword(), myUser.getPassword())*/) {			
+					myUserService.setCurrentUser(myUser);
+					logger.info("\n\t\tUser " + request.getEmail() + " logged on to the system.\n");
+					return new ResponseEntity<MyUser>(myUser, HttpStatus.OK);
+				} else {
+					logger.info("\n\t\tWrong credentials.\n");
+					return new ResponseEntity<MyUser>(myUser, HttpStatus.NOT_FOUND);
+				}
 			}
 		}
 			
-		logger.info("\n\t\tFailed to log in to the system.\n");
+		logger.info("\n\t\tUser not registered.\n");
 		return new ResponseEntity<MyUser>(myUser, HttpStatus.NOT_FOUND);
 	}
 	
@@ -212,6 +218,18 @@ public class MyUserController {
 	public ResponseEntity<String> decryptEmail(@PathVariable String email) throws InvalidKeyException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException, NoSuchPaddingException, NoSuchAlgorithmException{
 		String decryptedString = Encryptor.decrypt(email);
 		return new ResponseEntity<String>(decryptedString, HttpStatus.OK);
+	}
+	
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping(value = "/numberOfBooksPurchased", method = RequestMethod.GET)
+	public int numberOfBooksPurchased() {
+		MyUser myUser = myUserService.getCurrentUser();
+		
+		if (myUser == null) {
+			return -1;
+		}
+		
+		return myUser.getShoppingCart().getBooks().size();
 	}
 	
 	@PreAuthorize("isAuthenticated()")

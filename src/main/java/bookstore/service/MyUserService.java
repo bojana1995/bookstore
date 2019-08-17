@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import bookstore.model.MyUser;
 import bookstore.model.Role;
+import bookstore.model.UserType;
 
 @Service
 @Transactional
@@ -17,7 +18,8 @@ public interface MyUserService {
 	
 	MyUser findOne(Long id);	
 	List<MyUser> findAll();	
-	MyUser findByEmail(String email);	
+	MyUser findByEmail(String email);
+	List<MyUser> findByUserType(UserType userType);
 	List<MyUser> findByRole(Role role);
 	
 	MyUser save(MyUser user);

@@ -144,11 +144,21 @@ function login(){
 		},
 		success: function(data){
 			if(data){
-				if(data.userType == "ADMIN")
-					location.href = "/home-page-admin.html"
-				else
-					location.href = "/home-page-visitor.html"	
-			}else{
+				window.swal({
+					title: "Checking...",
+					text: "Please wait",
+					imageUrl: "images/load.gif",
+					showConfirmButton: false,
+					allowOutsideClick: false
+				});
+					
+				setTimeout(() => {
+					if(data.userType == "ADMIN")
+						location.href = "/home-page-admin.html"
+					else
+						location.href = "/home-page-visitor.html"
+				}, 2000);
+			} else {
 				swal({
 					  title: "",
 					  text: "Failed to login!",
@@ -159,12 +169,13 @@ function login(){
 			}
 		},
 		error: function(data){
-			swal({
-				  title: "",
-				  text: "ERROR!!!\n\n1. invalid request or\n2.the user does not exist in the database\n3. wrong credentials\n4. deactivated user account",
-				  icon: "error",
-				  timer: 2000,
-				  buttons: false
+			window.swal({
+				title: "",
+				text: "ERROR!!!\n\n1. user account not activated\n2. wrong credentials\n3. user not registered",
+				imageUrl: "images/error.gif",
+				showConfirmButton: false,
+				allowOutsideClick: true,
+				timer: 2500
 			});
 		}
 	});
@@ -337,13 +348,14 @@ function changePassword() {
 				if(data){
 					swal({
 					     title: "",
-					     text: "Your password was successfully changed!",
+					     text: "Your password was successfully changed. You will be logged out of the system!",
 					     icon: "success",
 					     timer: 2000,
 					     buttons: false
 					});
 					
 					$('#modalUpdateUser').modal('toggle');
+					window.setTimeout(function(){ logout(); }, 2000);
 				}else{
 					swal({
 						  title: "",

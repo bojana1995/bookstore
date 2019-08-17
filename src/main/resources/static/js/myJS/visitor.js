@@ -1,3 +1,30 @@
+$(document).ready(function() {
+	$.ajax({
+		url: "/myUser/numberOfBooksPurchased",
+		type: "GET",
+		contentType: "application/json",
+		crossDomain: true,
+	    headers: {  'Access-Control-Allow-Origin': '*' },
+		xhrFields: {
+			withCredentials: true
+		},
+		success: function(data){
+			$("#spanNumberOfBooksPurchased").append(data);
+		},
+		error: function(data){
+			swal({
+				  title: "",
+				  text: "ERROR!!!",
+				  icon: "error",
+				  timer: 2000,
+				  buttons: false
+			});
+		}
+	});
+});
+
+
+
 function buyBook(id) {
 	$.ajax({
 		url: "/book/buy/" + id,
@@ -9,23 +36,29 @@ function buyBook(id) {
 		xhrFields: {
 			withCredentials: true
 		},
-		success: function(data){
+		success: function(data, statusText, xhr){
 			if(data){
-				swal({
-				     title: "",
-				     text: "Successfully buying a book.",
-				     icon: "success",
-				     timer: 2000,
-				     buttons: false
-				});
-			}else{
-				swal({
-					  title: "",
-					  text: "Failed to buy book!",
-					  icon: "error",
-					  timer: 2000,
-					  buttons: false
-				});
+				var status = xhr.status;
+					
+				if(status == 200 || status == 202){
+					swal({
+						title: "",
+						text: "Successfully buying a book.",
+						icon: "success",
+						timer: 2000,
+						buttons: false
+					});
+				} else {
+					swal({
+						title: "Shopping disabled",
+						text: "The book has already been purchased!",
+						icon: "error",
+						timer: 2000,
+						buttons: false
+					});
+				}
+				
+				window.setTimeout(function(){location.reload();},1500);
 			}
 		},
 		error: function(data){
@@ -63,6 +96,8 @@ function showModalShoppingCartContent() {
 					if (data.length == 0) {
 						red = "<p><i><b>Your shopping cart is empty.</b></i></p>";
 						$("#knjige").append(red);
+						
+						$("#labelTotalForPayment").empty();
 						
 						$("#btnPaypal").hide();
 						$("#btnBitcoin").hide();
